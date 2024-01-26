@@ -27,4 +27,12 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.Data\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.Data\.editorconfig" />
+  </ItemGroup>
+
 </Project>

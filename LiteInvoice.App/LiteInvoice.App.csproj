@@ -21,4 +21,12 @@
     <ProjectReference Include="..\LiteInvoice.Data\LiteInvoice.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.App\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.App\.editorconfig" />
+  </ItemGroup>
+
 </Project>

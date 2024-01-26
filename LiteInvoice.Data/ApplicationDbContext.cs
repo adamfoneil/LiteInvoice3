@@ -8,7 +8,17 @@ namespace LiteInvoice.App.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
-	public DbSet<Business> Business { get; set; }
+	public DbSet<Business> Businesses { get; set; }
+	public DbSet<Project> Projects { get; set; }
+	public DbSet<WorkEntry> WorkEntries { get; set; }
+	public DbSet<Invoice> Invoices { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+		builder.Entity<Invoice>().HasAlternateKey(nameof(Invoice.BusinessId), nameof(Invoice.Number));
+    }
 }
 
 public class AppDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
