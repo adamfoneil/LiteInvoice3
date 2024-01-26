@@ -2,6 +2,7 @@
 using LiteInvoice.Data.Entities.Conventions;
 using LiteInvoice.Data.Entities.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
@@ -33,4 +34,12 @@ public class Business : BaseTable, IUserTable
 
     [MaxLength(50)]
     public string? Country { get; set; } = default!;
+
+    [MaxLength(30)]
+    public string? TaxId { get; set; } = default!;
+
+    [Column(TypeName = "decimal(5,2)")]
+    public decimal HourlyRate { get; set; }
+
+    public int NextInvoiceNumber { get; set; } = 1000;
 }

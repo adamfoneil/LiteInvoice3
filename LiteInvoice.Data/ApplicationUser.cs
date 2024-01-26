@@ -11,4 +11,5 @@ public class ApplicationUser : IdentityUser
 	public string? TimeZoneId { get; set; }
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public int UserId { get; set; }
+	public int? CurrentBusinessId { get; set; }
 }
