@@ -34,8 +34,8 @@ public class WorkEntryRepository(DapperEntities database) : BaseRepository<WorkE
 	protected override async Task BeforeSaveAsync(IDbConnection connection, RepositoryAction action, WorkEntry entity, IDbTransaction? transaction)
 	{
 		var rateInfo = await new GetHourlyRate() { ProjectId = entity.ProjectId }.ExecuteSingleAsync(connection);
-		entity.RateSource = rateInfo.RateSource;
-		entity.HourlyRate = rateInfo.Rate;
+		entity.RateSource = rateInfo.EffectiveRate.Source;
+		entity.HourlyRate = rateInfo.EffectiveRate.Rate;
 
 		await base.BeforeSaveAsync(connection, action, entity, transaction);
 	}
