@@ -6,13 +6,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
-public class Business : BaseTable, IUserTable
+public class Business : BaseTable, IUserTable, IContactInfo
 {
     [NotUpdated]
     public int UserId { get; set; } = default!;
 
     [MaxLength(50)]
     public string DisplayName { get; set; } = default!;
+
+	[NotMapped]
+	public string Name { get => DisplayName; set => DisplayName = value; }
 
     [MaxLength(50)]
     public string? Website { get; set; } = default!;

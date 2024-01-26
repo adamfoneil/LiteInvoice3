@@ -1,11 +1,12 @@
 ﻿using Dapper.Entities.Attributes;
 using LiteInvoice.Data.Entities.Conventions;
+using LiteInvoice.Data.Entities.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
-public class Customer : BaseTable
+public class Customer : BaseTable, IContactInfo
 {
 	[NotUpdated]
 	public int BusinessId { get; set; }
