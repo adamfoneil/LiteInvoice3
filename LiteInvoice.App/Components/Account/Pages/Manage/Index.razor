@@ -64,7 +64,7 @@
 
         user = await UserAccessor.GetRequiredUserAsync(HttpContext);
         username = await UserManager.GetUserNameAsync(user);
-        Entities.UserName = username!;
+        Entities.CurrentUser = user;
         phoneNumber = await UserManager.GetPhoneNumberAsync(user);
         timeZoneId = user.TimeZoneId;
 

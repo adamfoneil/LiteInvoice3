@@ -12,7 +12,7 @@ public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase>
 
 	public BaseRepository<Business> Businesses => new(this);
 	public BaseRepository<Project> Projects => new(this);
-	public BaseRepository<WorkEntry> WorkEntries => new(this);
+	public WorkEntryRepository WorkEntries => new(this);
 	public BaseRepository<Invoice> Invoices => new(this);
 
 	public const string DefaultTimeZone = "America/New_York";
