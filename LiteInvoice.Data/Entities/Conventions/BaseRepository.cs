@@ -1,5 +1,6 @@
 ﻿using Dapper.Entities;
 using Dapper.Entities.Interfaces;
+using LiteInvoice.Data.Entities.Interfaces;
 using System.Data;
 
 namespace LiteInvoice.Data.Entities.Conventions;
@@ -9,6 +10,11 @@ public class BaseRepository<TEntity>(DapperEntities database) : Repository<Dappe
 	protected override async Task BeforeSaveAsync(IDbConnection connection, RepositoryAction action, TEntity entity, IDbTransaction? transaction)
 	{
 		await Task.CompletedTask;
+
+		if (entity is IUserTable userTable && action == RepositoryAction.Insert)
+		{
+			userTable.UserId = Database.UserId;
+		}
 
 		if (entity is BaseTable baseTable)
 		{

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.App.Data;
 
@@ -8,4 +9,6 @@ public class ApplicationUser : IdentityUser
 {
 	[MaxLength(50)]
 	public string? TimeZoneId { get; set; }
+	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	public int UserId { get; set; }
 }

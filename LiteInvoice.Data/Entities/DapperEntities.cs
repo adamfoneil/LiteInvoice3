@@ -8,6 +8,7 @@ public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase>
 {
 	public string UserName { get; set; } = "system";
 	public string TimeZoneId { get; set; } = "Eastern Standard Time";
+	public int UserId { get; set; }
 
 	public async Task SetTimeZoneAsync(string timeZoneId)
 	{

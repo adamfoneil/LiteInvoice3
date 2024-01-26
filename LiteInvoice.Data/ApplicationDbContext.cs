@@ -1,3 +1,4 @@
+using LiteInvoice.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -6,7 +7,8 @@ using Microsoft.Extensions.Configuration;
 namespace LiteInvoice.App.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
-{	
+{
+	public DbSet<Business> Business { get; set; }
 }
 
 public class AppDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
