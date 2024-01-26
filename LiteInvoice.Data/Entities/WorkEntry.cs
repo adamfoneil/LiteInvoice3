@@ -14,5 +14,6 @@ public class WorkEntry : BaseTable
 	public decimal Hours { get; set; }
     [Column(TypeName = "decimal(5,2)")]    
     public decimal HourlyRate { get; set; }
+	public decimal Amount => Hours * HourlyRate;
 	public int? InvoiceId { get; set; }
 }

@@ -17,6 +17,9 @@ public class Business : BaseTable, IUserTable
     [MaxLength(50)]
     public string? Website { get; set; } = default!;
 
+	[MaxLength(50)]
+	public string? Email { get; set; } = default!;
+
     [MaxLength(20)]
     public string? PhoneNumber { get; set; } = default!;
 

@@ -13,36 +13,23 @@ public class BaseRepository<TEntity>(DapperEntities database) : Repository<Dappe
 
 		if (entity is IUserTable userTable && action == RepositoryAction.Insert)
 		{
-			userTable.UserId = Database.UserId;
+			userTable.UserId = Database.CurrentUser.UserId;
 		}
 
 		if (entity is BaseTable baseTable)
 		{
-			var localTime = LocalTime(Database.TimeZoneId);
+			var localTime = DapperEntities.LocalTime(Database.CurrentUser.TimeZoneId);
 			switch (action)
 			{
 				case RepositoryAction.Insert:
-					baseTable.CreatedBy = Database.UserName;
+					baseTable.CreatedBy = Database.CurrentUser.UserName ?? "<unknown>";
 					baseTable.DateCreated = localTime;
 					break;
 
 				case RepositoryAction.Update:
-					baseTable.ModifiedBy = Database.UserName;
+					baseTable.ModifiedBy = Database.CurrentUser.UserName ?? "<unknown>";
 					baseTable.DateModified = localTime;
 					break;
-			}
-		}
-
-		static DateTime LocalTime(string timeZoneId)
-		{
-			try
-			{
-				var tz = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
-				return TimeZoneInfo.ConvertTime(DateTime.UtcNow, tz);
-			}
-			catch
-			{
-				return DateTime.UtcNow;
 			}
 		}
 	}

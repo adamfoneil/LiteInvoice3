@@ -8,7 +8,7 @@ namespace LiteInvoice.Data.Entities;
 public class Project : BaseTable
 {
 	[NotUpdated]
-	public int BusinessId { get; set; }
+	public int CustomerId { get; set; }
 	[MaxLength(100)]
 	public string Name { get; set; } = default!;
 	[MaxLength(255)]
