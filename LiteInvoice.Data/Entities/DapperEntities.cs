@@ -25,6 +25,14 @@ public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase>
 			new { CurrentUser.UserName, timeZoneId });
 	}
 
+	public async Task<string> GetTimeZoneAsync()
+	{
+		using var cn = GetConnection();
+		return await cn.QuerySingleOrDefaultAsync<string>(
+			@"SELECT ""TimeZoneId"" FROM ""AspNetUsers"" WHERE ""UserName""=@userName",
+			new { CurrentUser.UserName }) ?? DefaultTimeZone;
+	}
+
 	public static DateTime LocalTime(string? timeZoneId)
 	{
 		if (timeZoneId == null) return DateTime.UtcNow;

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteInvoice.App", "LiteInvoice.App\LiteInvoice.App.csproj", "{55B10C58-9B17-4DC5-A965-7BB327519269}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.App", "LiteInvoice.App\LiteInvoice.App.csproj", "{55B10C58-9B17-4DC5-A965-7BB327519269}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteInvoice.Data", "LiteInvoice.Data\LiteInvoice.Data.csproj", "{BE59C028-E0F4-4AE1-BFB3-E4C3A1B63273}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.Data", "LiteInvoice.Data\LiteInvoice.Data.csproj", "{BE59C028-E0F4-4AE1-BFB3-E4C3A1B63273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BE59C028-E0F4-4AE1-BFB3-E4C3A1B63273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE59C028-E0F4-4AE1-BFB3-E4C3A1B63273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE59C028-E0F4-4AE1-BFB3-E4C3A1B63273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
