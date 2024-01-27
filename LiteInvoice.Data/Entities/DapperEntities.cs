@@ -8,14 +8,32 @@ namespace LiteInvoice.Data.Entities;
 
 public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase> logger) : PostgreSqlDatabase(connectionString, logger, new DefaultSqlBuilder() { CaseConversion = CaseConversionOptions.Exact })
 {
-	public ApplicationUser CurrentUser { get; set; } = new() { UserName = "system", TimeZoneId = DefaultTimeZone };
+	public string CurrentUserName { get; set; } = DefaultUserName;
+	public bool IsLoggedIn { get; set; }
+	public ApplicationUser CurrentUser { get; set; } = new() { UserName = DefaultUserName, TimeZoneId = DefaultTimeZone };
 
 	public BaseRepository<Business> Businesses => new(this);
 	public BaseRepository<Project> Projects => new(this);
 	public WorkEntryRepository WorkEntries => new(this);
 	public BaseRepository<Invoice> Invoices => new(this);
 
+	public const string DefaultUserName = "system";
 	public const string DefaultTimeZone = "America/New_York";
+
+	public async Task LoadCurrentUserAsync()
+	{		
+		if (CurrentUserName != (CurrentUser?.UserName ?? DefaultUserName))
+		{
+			Logger.LogInformation("Querying current user");
+
+			using var cn = GetConnection();
+			CurrentUser = await cn.QuerySingleOrDefaultAsync<ApplicationUser>(
+				@"SELECT * FROM ""AspNetUsers"" WHERE ""UserName""=@userName",
+				new { userName = CurrentUserName }) ?? throw new Exception($"user not found: {CurrentUserName}");
+
+			IsLoggedIn = true;
+		}		
+	}
 
 	public async Task SetTimeZoneAsync(string timeZoneId)
 	{
@@ -46,5 +64,5 @@ public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase>
 		{
 			return DateTime.UtcNow;
 		}
-	}
+	}	
 }
