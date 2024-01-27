@@ -2,7 +2,7 @@
 
 public interface IContactInfo
 {	
-	string Name { get; set; }
+	string? ContactName { get; set; }
 	string? Email { get; set; }
 	string? Website { get; set; }
 	string? PhoneNumber { get; set; } 

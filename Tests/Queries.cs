@@ -14,4 +14,7 @@ public class Queries
 
     [TestMethod]
     public void SetCurrentBusiness() => QueryHelper.Test<SetCurrentBusiness>(Util.GetConnection);
+
+    [TestMethod]
+    public void MyCustomers() => QueryHelper.Test<MyCustomers>(Util.GetConnection);
 }

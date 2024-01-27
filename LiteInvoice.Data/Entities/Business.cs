@@ -15,8 +15,8 @@ public class Business : BaseTable, IUserTable, IContactInfo
     [MaxLength(50)]
     public string DisplayName { get; set; } = default!;
 
-	[NotMapped]
-	public string Name { get => DisplayName; set => DisplayName = value; }
+	[MaxLength(50)]
+	public string? ContactName { get; set; } = default!;
 
     [MaxLength(50)]
     public string? Website { get; set; } = default!;

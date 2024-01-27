@@ -1,5 +1,7 @@
 ﻿@using LiteInvoice.Data.Entities.Interfaces
 
+<RadzenTextBox @bind-Value="Data.ContactName" MaxLength="50" Placeholder="contact name" class="w-100" />
+
 <div class="col-2-even">
 	<RadzenTextBox @bind-Value="Data.Email" Placeholder="email" MaxLength="50" />
 	<RadzenTextBox @bind-Value="Data.PhoneNumber" Placeholder="phone" MaxLength="20" />

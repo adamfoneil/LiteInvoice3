@@ -6,12 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
+[Table("Customers")]
 public class Customer : BaseTable, IContactInfo
 {
 	[NotUpdated]
 	public int BusinessId { get; set; }
 	[MaxLength(100)]
 	public string Name { get; set; } = default!;
+	[MaxLength(50)]
+	public string? ContactName { get; set; } = default!;
 	[MaxLength(50)]
 	public string? Email { get; set; } = default!;
 	[MaxLength(50)]
