@@ -2,10 +2,10 @@ using LiteInvoice.App.Components;
 using LiteInvoice.App.Components.Account;
 using LiteInvoice.App.Data;
 using LiteInvoice.App.Extensions;
-using LiteInvoice.Data.Entities;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.Secret.json", optional: true);
@@ -19,6 +19,7 @@ builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddRadzenComponents();
 
 builder.Services.AddAuthentication(options =>
 	{

@@ -4,19 +4,39 @@
 <h3>Projects</h3>
 <p>Create one or more projects to represent ongoing work for customers. Then create invoices for those projects.</p>
 
-<RadzenDropDown @bind-Value="customerId" Data="customers" ValueProperty="Id" TextProperty="Name" />
+<RadzenDropDown @bind-Value="gridHelper.CustomerId" Data="customers" ValueProperty="Id" TextProperty="Name" Change="gridHelper.RefreshAsync" />
 
+<GridInsertButton Grid="grid" OnCreateItem="() => new Project() { CustomerId = gridHelper.CustomerId }" TItem="Project"/>
+
+<RadzenGrid @ref="grid"
+	Data="gridHelper.Data" TItem="Project" RowCreate="gridHelper.SaveRowAsync" RowUpdate="gridHelper.SaveRowAsync">
+	<Columns>
+		<RadzenGridColumn TItem="Project" Title="Project Name" Property="Name">
+			<EditTemplate>
+				<RadzenTextBox @bind-Value="context.Name" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<RadzenGridColumn TItem="Project" Title="Description" Property="Description">
+			<EditTemplate>
+				<RadzenTextBox @bind-Value="context.Description" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<GridControls Grid="grid" TItem="Project"  DeletingRow="gridHelper.DeleteRowAsync" />
+	</Columns>
+</RadzenGrid>
 
 @code {
-	private IEnumerable<Customer> customers = [];
-	private int customerId;
-	private ILookup<int, Project> projectsByCustomer = Enumerable.Empty<Project>().ToLookup(row => row.CustomerId);
+	private RadzenGrid<Project> grid;
+	private ProjectsGridHelper gridHelper = default!;
+	private IEnumerable<Customer> customers = [];		
 
 	protected override async Task OnInitializedAsync()
 	{
+		gridHelper = new(Dialog, Data);
+
 		await base.OnInitializedAsync();
 
 		customers = await Data.QueryAsync(new MyCustomers());
-		projectsByCustomer = (await Data.QueryAsync(new MyProjects())).ToLookup(row => row.CustomerId);
+		await gridHelper.RefreshAsync();		
 	}
 }

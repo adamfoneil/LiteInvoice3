@@ -1,4 +1,5 @@
 ﻿using Dapper.QX.Abstract;
+using Dapper.QX.Attributes;
 using Dapper.QX.Interfaces;
 using LiteInvoice.Data.Entities;
 using LiteInvoice.Data.Interfaces;
@@ -22,10 +23,17 @@ public class MyProjects : TestableQuery<Project>, IUserQuery
 	}
 
 	public int UserId { get; set; }
+
+	[Where(@"""p"".""IsActive""=@isActive")]
 	public bool? IsActive { get; set; } = true;
+
+	[Where(@"""p"".""CustomerId""=@customerId")]
+	public int? CustomerId { get; set; }
 
 	protected override IEnumerable<ITestableQuery> GetTestCasesInner()
 	{
 		yield return new MyProjects() { UserId = 1 };
+		yield return new MyProjects() { UserId = 1, CustomerId = 1 };
+		yield return new MyProjects() { UserId = 1, IsActive = true };
 	}
 }

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LiteInvoice.Data\LiteInvoice.Data.csproj" />
+    <ProjectReference Include="..\Radzen.Components\Radzen.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>

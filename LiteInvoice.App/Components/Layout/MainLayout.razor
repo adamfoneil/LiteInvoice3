@@ -3,6 +3,8 @@
 @inject DapperEntities Data
 @inject IdentityUserAccessor UserAccessor
 
+<RadzenComponents />
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -12,12 +14,10 @@
         <div class="top-row px-4">
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
-    
-        <CascadingValue Value="Data">
-            <article class="content px-4">
-                @Body
-            </article>
-        </CascadingValue>
+            
+        <article class="content px-4">
+            @Body
+        </article>        
     </main>
 </div>
 
@@ -26,16 +26,3 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
-
-@code {
-    [CascadingParameter]
-    private HttpContext HttpContext { get; set; } = default!;
-
-    protected override async Task OnParametersSetAsync()
-    {
-        if (HttpContext?.User?.Identity?.IsAuthenticated ?? false)
-        {
-            Data.CurrentUser = await UserAccessor.GetRequiredUserAsync(HttpContext);
-        }
-    }
-}
