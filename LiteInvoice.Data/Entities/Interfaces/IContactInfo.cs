@@ -4,6 +4,7 @@ public interface IContactInfo
 {	
 	string Name { get; set; }
 	string? Email { get; set; }
+	string? Website { get; set; }
 	string? PhoneNumber { get; set; } 
 	string? MailingAddress { get; set; }
 	string? City { get; set; }

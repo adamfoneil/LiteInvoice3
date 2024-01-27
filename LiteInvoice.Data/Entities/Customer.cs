@@ -14,6 +14,8 @@ public class Customer : BaseTable, IContactInfo
 	public string Name { get; set; } = default!;
 	[MaxLength(50)]
 	public string? Email { get; set; } = default!;
+	[MaxLength(50)]
+	public string? Website { get; set; }
 	[MaxLength(20)]
 	public string? PhoneNumber { get; set; } = default!;
 	[MaxLength(50)]
@@ -27,5 +29,5 @@ public class Customer : BaseTable, IContactInfo
 	[MaxLength(50)]
 	public string? Country { get; set; } = default!;
 	[Column(TypeName = "decimal(5,2)")]
-	public decimal HourlyRate { get; set; }
+	public decimal HourlyRate { get; set; }	
 }

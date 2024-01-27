@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
+[Table("Businesses")]
 public class Business : BaseTable, IUserTable, IContactInfo
 {
     [NotUpdated]

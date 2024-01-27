@@ -10,9 +10,6 @@ public class DataComponent : ComponentBase
 
 	protected override async Task OnInitializedAsync()
 	{
-		if (Data.IsLoggedIn)
-		{
-			await Data.LoadCurrentUserAsync();
-		}
+		if (Data.IsLoggedIn) await Data.LoadCurrentUserAsync();
 	}
 }

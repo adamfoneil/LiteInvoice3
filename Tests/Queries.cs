@@ -7,5 +7,11 @@ namespace Tests;
 public class Queries
 {
     [TestMethod]
-    public void GetHourlyRate() => QueryHelper.Test<GetHourlyRate>(Util.GetConnection);    
+    public void GetHourlyRate() => QueryHelper.Test<GetHourlyRate>(Util.GetConnection);
+
+    [TestMethod]
+    public void MyBusinesses() => QueryHelper.Test<MyBusinesses>(Util.GetConnection);
+
+    [TestMethod]
+    public void SetCurrentBusiness() => QueryHelper.Test<SetCurrentBusiness>(Util.GetConnection);
 }

@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 
 namespace LiteInvoice.Data.Entities;
 
-public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase> logger) : PostgreSqlDatabase(connectionString, logger, new DefaultSqlBuilder() { CaseConversion = CaseConversionOptions.Exact })
+public partial class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase> logger) : PostgreSqlDatabase(connectionString, logger, new DefaultSqlBuilder() { CaseConversion = CaseConversionOptions.Exact })
 {
 	public string CurrentUserName { get; set; } = DefaultUserName;
 	public bool IsLoggedIn { get; set; }
 	public ApplicationUser CurrentUser { get; set; } = new() { UserName = DefaultUserName, TimeZoneId = DefaultTimeZone };
 
-	public BaseRepository<Business> Businesses => new(this);
+	public BusinessRepository Businesses => new(this);
 	public BaseRepository<Project> Projects => new(this);
 	public WorkEntryRepository WorkEntries => new(this);
 	public BaseRepository<Invoice> Invoices => new(this);
