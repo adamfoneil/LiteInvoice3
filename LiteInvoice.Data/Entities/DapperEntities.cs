@@ -24,7 +24,7 @@ public class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase>
 	{		
 		if (CurrentUserName != (CurrentUser?.UserName ?? DefaultUserName))
 		{
-			Logger.LogInformation("Querying current user");
+			Logger.LogInformation("LoadCurrentUserAsync");
 
 			using var cn = GetConnection();
 			CurrentUser = await cn.QuerySingleOrDefaultAsync<ApplicationUser>(
