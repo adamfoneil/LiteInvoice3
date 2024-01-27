@@ -12,19 +12,19 @@ public class GetHourlyRateResult
 	public decimal? CustomerRate { get; set; }
 	public RateSource BusinessRateSource { get; set; }
 	public decimal BusinessRate { get; set; }
-
-	private IEnumerable<(RateSource?, decimal?)> AllRates =>
-	[
-		(ProjectRateSource, ProjectRate),
-		(CustomerRateSource, CustomerRate),
-		(BusinessRateSource, BusinessRate),
-	];
-
+	
 	public (RateSource Source, decimal Rate) EffectiveRate
 	{
 		get
 		{
-			var (source, rate) = AllRates.First(item => item.Item1.HasValue);
+			IEnumerable<(RateSource?, decimal?)> allRates =
+			[
+				(ProjectRateSource, ProjectRate),
+				(CustomerRateSource, CustomerRate),
+				(BusinessRateSource, BusinessRate),
+			];
+
+			var (source, rate) = allRates.First(item => item.Item1.HasValue);
 			return (source!.Value, rate!.Value);
 		}		
 	}	

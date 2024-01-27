@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.App", "LiteInvo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.Data", "LiteInvoice.Data\LiteInvoice.Data.csproj", "{BE59C028-E0F4-4AE1-BFB3-E4C3A1B63273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{FE3A6E85-0F7F-4B47-B7EA-F6A96E424F43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
