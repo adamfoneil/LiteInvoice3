@@ -12,13 +12,13 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 	public DbSet<Project> Projects { get; set; }
 	public DbSet<WorkEntry> WorkEntries { get; set; }
 	public DbSet<Invoice> Invoices { get; set; }
-	public DbSet<Customer> Customers { get; set; }
+	public DbSet<Customer> Customers { get; set; }	
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-		builder.Entity<Invoice>().HasAlternateKey(nameof(Invoice.BusinessId), nameof(Invoice.Number));
+		builder.Entity<Invoice>().HasAlternateKey(nameof(Invoice.BusinessId), nameof(Invoice.Number));		
     }
 }
 

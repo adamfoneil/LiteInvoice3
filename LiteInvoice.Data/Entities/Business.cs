@@ -49,4 +49,39 @@ public class Business : BaseTable, IUserTable, IContactInfo
     public decimal HourlyRate { get; set; }
 
     public int NextInvoiceNumber { get; set; } = 1000;
+
+	public bool UsePayPalMe { get; set; }
+	[MaxLength(100)]
+	public string? PayPalMeLink { get; set; } = default!;
+	
+	public bool UseCashApp { get; set; }
+	[MaxLength(100)]
+	public string? CashAppLink { get; set; } = default!;
+
+	public bool UseVenmo { get; set; }
+	[MaxLength(100)]
+	public string? VenmoLink { get; set; } = default!;
+
+	public const string PayPalMeLinkPrefix = "https://paypal.me";
+	public const string CashAppLinkPrefix = "https://cash.app";
+	public const string VenmoLinkPrefix = "https://venmo.com";
+
+	[NotMapped]
+	public List<PaymentMethod> PaymentMethods { get; set; } = [];
+
+	public List<PaymentMethod> GetPaymentMethods() =>
+	[
+		new PaymentMethod() { Name = "PayPal.Me", IsEnabled = UsePayPalMe, LinkPrefix = PayPalMeLinkPrefix, MyLink = PayPalMeLink, Setter = (enabled, link) => { UsePayPalMe = enabled; PayPalMeLink = link; } },
+		new PaymentMethod() { Name = "Cash.App", IsEnabled = UseCashApp, LinkPrefix = CashAppLinkPrefix, MyLink = CashAppLink, Setter = (enabled, link) => { UseCashApp = enabled; CashAppLink = link; } },
+		new PaymentMethod() { Name = "Venmo", IsEnabled = UseVenmo, LinkPrefix = VenmoLinkPrefix, MyLink = VenmoLink, Setter = (enabled, link) => { UseVenmo = enabled; VenmoLink = link; } }
+	];	
+	
+	public class PaymentMethod
+	{
+		public string Name { get; init; } = default!;
+		public string LinkPrefix { get; init; } = default!;
+		public bool IsEnabled { get; set; }
+		public string? MyLink { get; set; } = default!;
+		public Action<bool, string?> Setter { get; init; } = default!;
+	}
 }

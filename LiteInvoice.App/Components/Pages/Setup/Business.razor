@@ -17,16 +17,37 @@
 	
 	<ContactInfo Data="business" />
 
-	<RadzenNumeric @bind-Value="business.HourlyRate" Placeholder="hourly rate" />
+	<div class="mt-3 col-2-even">
+		<label>
+			Hourly Rate:
+			<RadzenNumeric @bind-Value="business.HourlyRate" Placeholder="hourly rate" />
+		</label>
+		
+		<label>
+			Next Invoice Number:
+			<RadzenNumeric @bind-Value="business.NextInvoiceNumber" />
+		</label>	
+	</div>
 
-	<label>Next Invoice Number:</label>
-	<RadzenNumeric @bind-Value="business.NextInvoiceNumber" />
+	<hr />
+	<h4>Payment Methods</h4>
+	<div class="payment-methods">
+	@foreach (var item in business.PaymentMethods)
+	{
+		<label>			
+			<RadzenCheckBox @bind-Value="item.IsEnabled" />
+			@item.Name
+		</label>
+
+		<RadzenTextBox @bind-Value="@item.MyLink" MaxLength="100" />
+	}
+	</div>
 
 	<RadzenButton ButtonType="ButtonType.Submit" Text="Save" Icon="save" />
 </RadzenTemplateForm>
 
 @code {
-	IEnumerable<Entities.Business> allBusinesses = [];
+	IEnumerable<Entities.Business> allBusinesses = [];	
 	Entities.Business business = new();
 
 	protected override async Task OnInitializedAsync()
@@ -43,5 +64,5 @@
 	async Task SaveBusiness(Entities.Business business)
 	{
 		await Data.Businesses.SaveAsync(business);
-	}
+	}	
 }
