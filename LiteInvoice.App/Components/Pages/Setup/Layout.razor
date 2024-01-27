@@ -1,0 +1,15 @@
+﻿@using LiteInvoice.App.Components.Layout
+@inherits LayoutComponentBase
+@layout MainLayout
+
+<div class="d-flex">
+	<div class="sidebar pt-5 border-end">
+		<IconNavLink Icon="settings" Text="Setup Home" Href="/Setup" />
+		<IconNavLink Icon="business" Text="My Business" Href="/Setup/Business" />
+		<IconNavLink Icon="account_circle" Text="Customers" Href="/Setup/Customers" />
+		<IconNavLink Icon="work" Text="Projects" Href="/Setup/Projects" />
+	</div>
+	<main class="ps-4">
+		@Body
+	</main>
+</div>
