@@ -1,0 +1,22 @@
+﻿<div class="nav-item px-3">
+    <NavLink class="nav-link" href="@Href" Match="@Match">
+        <div class="d-flex align-items-center">
+            <RadzenIcon Icon="@Icon" />
+            <span class="ms-2">@Text</span>
+        </div>
+    </NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public string Href { get; set; } = default!;
+
+    [Parameter]
+    public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+
+    [Parameter]
+    public string Icon { get; set; } = default!;
+
+    [Parameter]
+    public string Text { get; set; } = default!;
+}
