@@ -2,7 +2,21 @@
 @inherits DataComponent
 
 <h3>Projects</h3>
+<p>Create one or more projects to represent ongoing work for customers. Then create invoices for those projects.</p>
+
+<RadzenDropDown @bind-Value="customerId" Data="customers" ValueProperty="Id" TextProperty="Name" />
+
 
 @code {
+	private IEnumerable<Customer> customers = [];
+	private int customerId;
+	private ILookup<int, Project> projectsByCustomer = Enumerable.Empty<Project>().ToLookup(row => row.CustomerId);
 
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		customers = await Data.QueryAsync(new MyCustomers());
+		projectsByCustomer = (await Data.QueryAsync(new MyProjects())).ToLookup(row => row.CustomerId);
+	}
 }

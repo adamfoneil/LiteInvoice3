@@ -17,4 +17,7 @@ public class Queries
 
     [TestMethod]
     public void MyCustomers() => QueryHelper.Test<MyCustomers>(Util.GetConnection);
+
+    [TestMethod]
+    public void MyProjects() => QueryHelper.Test<MyProjects>(Util.GetConnection);
 }

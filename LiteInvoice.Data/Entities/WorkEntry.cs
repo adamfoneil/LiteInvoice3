@@ -1,4 +1,5 @@
 ﻿using Dapper.Entities;
+using Dapper.Entities.Attributes;
 using LiteInvoice.Data.Entities.Conventions;
 using LiteInvoice.Data.Queries;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,7 @@ public enum RateSource
 
 public class WorkEntry : BaseTable
 {
+	[NotUpdated]
 	public int ProjectId { get; set; }
 	public DateOnly Date { get; set; }
 	[MaxLength(255)]
@@ -23,7 +25,7 @@ public class WorkEntry : BaseTable
 	[Column(TypeName = "decimal(4,2)")]
 	public decimal Hours { get; set; }
 	public RateSource RateSource { get; set; }
-    [Column(TypeName = "decimal(5,2)")]    
+    [Column(TypeName = "decimal(5,2)")]
     public decimal HourlyRate { get; set; }
 	public decimal Amount => Hours * HourlyRate;
 	public int? InvoiceId { get; set; }

@@ -13,6 +13,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 	public DbSet<WorkEntry> WorkEntries { get; set; }
 	public DbSet<Invoice> Invoices { get; set; }
 	public DbSet<Customer> Customers { get; set; }	
+	public DbSet<LineEntry> LineEntries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
