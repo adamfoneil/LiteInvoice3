@@ -21,6 +21,11 @@
 				<RadzenTextBox @bind-Value="context.Description" />
 			</EditTemplate>
 		</RadzenGridColumn>
+		<RadzenGridColumn TItem="Project" Title="Hourly Rate" Property="HourlyRate" Format="c2">
+			<EditTemplate>
+				<RadzenNumeric @bind-Value="context.HourlyRate" />
+			</EditTemplate>
+		</RadzenGridColumn>
 		<GridControls Grid="grid" TItem="Project"  DeletingRow="gridHelper.DeleteRowAsync" />
 	</Columns>
 </RadzenGrid>
