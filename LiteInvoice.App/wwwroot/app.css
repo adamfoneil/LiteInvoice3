@@ -49,3 +49,9 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.setup-sidebar a:link.active, .setup-sidebar a:visited.active {
+    background-color: darkmagenta;
+    color: white;
+    border-radius:7px
+}

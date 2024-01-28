@@ -3,11 +3,11 @@
 @layout MainLayout
 
 <div class="d-flex">
-	<div class="sidebar pt-5 border-end">
-		<IconNavLink Icon="settings" Text="Setup Home" Href="/Setup" />
-		<IconNavLink Icon="business" Text="My Business" Href="/Setup/Business" />
-		<IconNavLink Icon="account_circle" Text="Customers" Href="/Setup/Customers" />
-		<IconNavLink Icon="work" Text="Projects" Href="/Setup/Projects" />
+	<div class="sidebar pt-5 border-end setup-sidebar">
+		<IconNavLink Icon="settings" Text="Setup Home" Href="/Setup" Match="NavLinkMatch.All" ContainerDivClass="pe-3" />
+		<IconNavLink Icon="business" Text="My Business" Href="/Setup/Business" ContainerDivClass="pe-3" />
+		<IconNavLink Icon="account_circle" Text="Customers" Href="/Setup/Customers" ContainerDivClass="pe-3" />
+		<IconNavLink Icon="work" Text="Projects" Href="/Setup/Projects" ContainerDivClass="pe-3" />
 	</div>
 	<main class="ps-4">
 		@Body
