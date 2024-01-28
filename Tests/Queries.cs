@@ -17,4 +17,7 @@ public class Queries
 
     [TestMethod]
     public void MyProjects() => QueryHelper.Test<MyProjects>(Util.GetConnection);
+
+    [TestMethod]
+    public void MyPendingWorkEntries() => QueryHelper.Test<MyPendingWorkEntries>(Util.GetConnection);
 }

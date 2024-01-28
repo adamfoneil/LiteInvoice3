@@ -199,7 +199,7 @@ namespace LiteInvoice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Businesses");
+                    b.ToTable("Businesses", (string)null);
                 });
 
             modelBuilder.Entity("LiteInvoice.Data.Entities.Customer", b =>
@@ -274,7 +274,7 @@ namespace LiteInvoice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("LiteInvoice.Data.Entities.Invoice", b =>
@@ -316,7 +316,7 @@ namespace LiteInvoice.Data.Migrations
 
                     b.HasAlternateKey("BusinessId", "Number");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("LiteInvoice.Data.Entities.LineEntry", b =>
@@ -358,7 +358,7 @@ namespace LiteInvoice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LineEntries");
+                    b.ToTable("LineEntries", (string)null);
                 });
 
             modelBuilder.Entity("LiteInvoice.Data.Entities.Project", b =>
@@ -404,7 +404,7 @@ namespace LiteInvoice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("LiteInvoice.Data.Entities.WorkEntry", b =>
@@ -452,7 +452,7 @@ namespace LiteInvoice.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WorkEntries");
+                    b.ToTable("WorkEntries", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
