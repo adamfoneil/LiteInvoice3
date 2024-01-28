@@ -32,5 +32,7 @@ public class Customer : BaseTable, IContactInfo
 	[MaxLength(50)]
 	public string? Country { get; set; } = default!;
 	[Column(TypeName = "decimal(5,2)")]
-	public decimal HourlyRate { get; set; }	
+	public decimal HourlyRate { get; set; }
+
+	public Business? Business { get; private set; }
 }

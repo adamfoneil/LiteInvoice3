@@ -17,4 +17,6 @@ public class Project : BaseTable
 	[Column(TypeName = "decimal(5,2)")]
 	public decimal HourlyRate { get; set; }
 	public bool IsActive { get; set; } = true;
+
+	public Customer? Customer { get; private set; }
 }

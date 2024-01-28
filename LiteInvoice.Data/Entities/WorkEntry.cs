@@ -16,9 +16,11 @@ public class WorkEntry : BaseTable
 	public string Comments { get; set; } = default!;
 	[Column(TypeName = "decimal(4,2)")]
 	public decimal Hours { get; set; }
-    [Column(TypeName = "decimal(5,2)")]
-    public decimal HourlyRate { get; set; }
+	[Column(TypeName = "decimal(5,2)")]
+	public decimal HourlyRate { get; set; }
 	[NotMapped]
 	public decimal Amount => Hours * HourlyRate;
 	public int? InvoiceId { get; set; }
+
+	public Project? Project { get; private set; }
 }
