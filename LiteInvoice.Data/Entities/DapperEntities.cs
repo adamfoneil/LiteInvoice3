@@ -14,7 +14,7 @@ public partial class DapperEntities(string connectionString, ILogger<PostgreSqlD
 
 	public BusinessRepository Businesses => new(this);
 	public CustomerRepository Customers => new(this);
-	public BaseRepository<Project> Projects => new(this);
+	public ProjectRepository Projects => new(this);
 	public WorkEntryRepository WorkEntries => new(this);
 	public BaseRepository<Invoice> Invoices => new(this);
 

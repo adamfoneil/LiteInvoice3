@@ -15,6 +15,6 @@ public class Project : BaseTable
 	[MaxLength(255)]
 	public string? Description { get; set; } = default!;
 	[Column(TypeName = "decimal(5,2)")]
-	public decimal? HourlyRate { get; set; }
+	public decimal HourlyRate { get; set; }
 	public bool IsActive { get; set; } = true;
 }
