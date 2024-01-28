@@ -21,9 +21,9 @@
 
 <RadzenGrid @ref="grid" Data="gridHelper.Data" TItem="WorkEntry" RowCreate="gridHelper.SaveRowAsync" RowUpdate="gridHelper.SaveRowAsync">
 	<Columns>
-		<RadzenGridColumn TItem="WorkEntry" Title="Date" Property="Date" Format="ddd M/d">
+		<RadzenGridColumn TItem="WorkEntry" Title="Date" Property="Date" FormatString="{0:ddd M/d}">
 			<EditTemplate>
-				<RadzenDatePicker @bind-Value="context.Date" />
+				<RadzenDatePicker @bind-Value="context.Date" DateFormat="ddd M/d" />
 			</EditTemplate>
 		</RadzenGridColumn>
 		<RadzenGridColumn TItem="WorkEntry" Title="Comments" Property="Comments">
