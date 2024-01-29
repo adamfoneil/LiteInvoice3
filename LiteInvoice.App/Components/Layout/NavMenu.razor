@@ -13,8 +13,6 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column pt-2">
         <IconNavLink Href="/" Match="NavLinkMatch.All" Icon="home" Text="Home" />
-        <IconNavLink Href="auth" Icon="lock" Text="Auth Required" />
-
         <AuthorizeView>
             <Authorized>
                 <IconNavLink Icon="work" Href="/WorkEntries" Text="Work Entries" />
