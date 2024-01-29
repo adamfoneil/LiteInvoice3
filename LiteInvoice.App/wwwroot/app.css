@@ -55,3 +55,13 @@ h1:focus {
     color: white;
     border-radius:7px
 }
+
+nav a.nav-link:link, nav a.nav-link:visited {
+    color:white
+}
+
+nav a.nav-link:hover {
+    color:white;
+    background-color:rgba(255,255,255,0.1);
+    border-radius:7px
+}
