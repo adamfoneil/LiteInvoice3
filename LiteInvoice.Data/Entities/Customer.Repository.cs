@@ -8,7 +8,7 @@ public class CustomerRepository(DapperEntities database) : BaseRepository<Custom
 {
 	protected override async Task BeforeSaveAsync(IDbConnection connection, RepositoryAction action, Customer entity, IDbTransaction? transaction)
 	{
-		if (action == RepositoryAction.Insert)
+		if (action == RepositoryAction.Insert && entity.BusinessId == 0)
 		{
 			entity.BusinessId = Database.CurrentUser.CurrentBusinessId ?? 0;
 		}

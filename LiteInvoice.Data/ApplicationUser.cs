@@ -1,3 +1,4 @@
+using LiteInvoice.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,4 +13,6 @@ public class ApplicationUser : IdentityUser
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public int UserId { get; set; }
 	public int? CurrentBusinessId { get; set; }
+	[NotMapped]
+	public DateTime LocalTime => DapperEntities.LocalTime(TimeZoneId);
 }

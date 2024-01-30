@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
+[Table("Invoices")]
 public class Invoice : BaseTable
 {
     [NotUpdated]
