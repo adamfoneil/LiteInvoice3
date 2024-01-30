@@ -71,6 +71,9 @@ namespace Tests
 			Assert.IsTrue(invoice.Number == 1233);
 			Assert.IsTrue(invoice.Amount == 160m);
 
+			var biz = await db.Businesses.GetAsync(business.Id) ?? throw new Exception("business not found");
+			Assert.IsTrue(biz.NextInvoiceNumber == 1234);
+
 			//todo: delete test data
 		}
 	}
