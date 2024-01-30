@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.Secret.json", optional: true);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 

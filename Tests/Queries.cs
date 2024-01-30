@@ -20,4 +20,7 @@ public class Queries
 
     [TestMethod]
     public void MyPendingWorkEntries() => QueryHelper.Test<MyPendingWorkEntries>(Util.GetConnection);
+
+    [TestMethod]
+    public void MyPendingLineEntries() => QueryHelper.Test<MyPendingLineEntries>(Util.GetConnection);
 }

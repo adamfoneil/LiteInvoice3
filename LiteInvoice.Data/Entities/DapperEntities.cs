@@ -16,6 +16,7 @@ public partial class DapperEntities(string connectionString, ILogger<PostgreSqlD
 	public CustomerRepository Customers => new(this);
 	public ProjectRepository Projects => new(this);
 	public WorkEntryRepository WorkEntries => new(this);
+	public BaseRepository<LineEntry> LineEntries => new(this);
 	public BaseRepository<Invoice> Invoices => new(this);
 
 	public const string DefaultUserName = "system";
