@@ -41,8 +41,7 @@ namespace Tests
 			var customer = await db.Customers.SaveAsync(new Customer()
 			{
 				BusinessId = business.Id,
-				Name = "sample customer",
-				HourlyRate = 50 // should flow from business, but currently doesn't do that
+				Name = "sample customer"
 			});
 
 			var project = await db.Projects.SaveAsync(new Project()
@@ -71,6 +70,8 @@ namespace Tests
 			var invoice = await db.Invoices.GetAsync(invoiceId) ?? throw new Exception("invoice not found");
 			Assert.IsTrue(invoice.Number == 1233);
 			Assert.IsTrue(invoice.Amount == 160m);
+
+			//todo: delete test data
 		}
 	}
 }

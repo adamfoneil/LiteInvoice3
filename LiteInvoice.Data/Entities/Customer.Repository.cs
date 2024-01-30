@@ -8,9 +8,18 @@ public class CustomerRepository(DapperEntities database) : BaseRepository<Custom
 {
 	protected override async Task BeforeSaveAsync(IDbConnection connection, RepositoryAction action, Customer entity, IDbTransaction? transaction)
 	{
-		if (action == RepositoryAction.Insert && entity.BusinessId == 0)
-		{
-			entity.BusinessId = Database.CurrentUser.CurrentBusinessId ?? 0;
+		if (action == RepositoryAction.Insert)
+		{			
+			if (entity.BusinessId == 0)
+			{
+				entity.BusinessId = Database.CurrentUser.CurrentBusinessId ?? 0;
+			}
+
+			if (entity.HourlyRate == 0)
+			{
+				var project = await Database.Businesses.GetAsync(connection, entity.BusinessId) ?? throw new Exception($"Business Id {entity.BusinessId} not found");
+				entity.HourlyRate = project.HourlyRate;
+			}
 		}
 
 		await base.BeforeSaveAsync(connection, action, entity, transaction);
