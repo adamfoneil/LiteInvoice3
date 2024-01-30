@@ -67,11 +67,11 @@ namespace Tests
 
 			var invoiceId = await db.CreateInvoiceAsync(project.Id);
 
-			var invoice = await db.Invoices.GetAsync(invoiceId) ?? throw new Exception("invoice not found");
+			var invoice = await db.Invoices.GetAsync(invoiceId);
 			Assert.IsTrue(invoice.Number == 1233);
 			Assert.IsTrue(invoice.Amount == 160m);
 
-			var biz = await db.Businesses.GetAsync(business.Id) ?? throw new Exception("business not found");
+			var biz = await db.Businesses.GetAsync(business.Id);
 			Assert.IsTrue(biz.NextInvoiceNumber == 1234);
 
 			//todo: delete test data
