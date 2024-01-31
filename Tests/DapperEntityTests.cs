@@ -21,7 +21,8 @@ namespace Tests
 		{
 			var db = Util.DapperEntities;
 			db.CurrentUser = new() { UserName = "nobody", TimeZoneId = "America/New_York" };
-			await db.CreateInvoiceAsync(-100);
+			var invoiceId = await db.CreateInvoiceAsync(-100);
+			await db.DeleteInvoiceAsync(invoiceId);
 		}
 
 		[TestMethod]
@@ -73,6 +74,8 @@ namespace Tests
 
 			var biz = await db.Businesses.GetAsync(business.Id);
 			Assert.IsTrue(biz.NextInvoiceNumber == 1234);
+
+			await db.DeleteInvoiceAsync(invoiceId);
 
 			//todo: delete test data
 		}
