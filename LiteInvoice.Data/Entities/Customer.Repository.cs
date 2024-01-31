@@ -17,7 +17,7 @@ public class CustomerRepository(DapperEntities database) : BaseRepository<Custom
 
 			if (entity.HourlyRate == 0)
 			{
-				var project = await Database.Businesses.GetAsync(connection, entity.BusinessId) ?? throw new Exception($"Business Id {entity.BusinessId} not found");
+				var project = await Database.Businesses.GetAsync(connection, entity.BusinessId);
 				entity.HourlyRate = project.HourlyRate;
 			}
 		}
