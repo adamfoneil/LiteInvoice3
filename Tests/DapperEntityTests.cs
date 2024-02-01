@@ -75,9 +75,16 @@ namespace Tests
 			var biz = await db.Businesses.GetAsync(business.Id);
 			Assert.IsTrue(biz.NextInvoiceNumber == 1234);
 
-			//await db.DeleteInvoiceAsync(invoiceId);
+			await db.DeleteInvoiceAsync(invoiceId);
 
-			//todo: delete test data
+			await db.DoTransactionAsync(async (cn, txn) =>
+			{
+				await db.LineEntries.DeleteAsync(cn, le, txn);
+				await db.WorkEntries.DeleteAsync(cn, we, txn);
+				await db.Projects.DeleteAsync(cn, project, txn);
+				await db.Customers.DeleteAsync(cn, customer, txn);
+				await db.Businesses.DeleteAsync(cn, biz, txn);				
+			});
 		}
 	}
 }
