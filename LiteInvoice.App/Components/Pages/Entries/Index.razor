@@ -2,7 +2,7 @@
 @inherits DataComponent
 
 <h3>Entries</h3>
-<p>Use this to enter hours and fixed price entries to build your invoices.</p>
+<p>Use this to enter hours and expenses to build your invoices.</p>
 
 @if (hoursGridHelper is null) return;
 @if (linesGridHelper is null) return;
@@ -42,7 +42,7 @@
 	</Columns>
 </RadzenGrid>
 
-<h4>Fixed Price Items</h4>
+<h4 class="mt-3">Expenses</h4>
 <GridInsertButton Grid="linesGrid" OnCreateItem="() => new LineEntry() { ProjectId = hoursGridHelper.ProjectId }"/>
 <RadzenGrid TItem="LineEntry" @ref="linesGrid" RowCreate="linesGridHelper.SaveRowAsync" RowUpdate="linesGridHelper.SaveRowAsync" Data="linesGridHelper.Data">
 	<Columns>
@@ -61,9 +61,8 @@
 </RadzenGrid>
 
 <div class="d-flex justify-content-center mt-3">
-	<RadzenButton Text="@invoiceButtonText" Icon="request_quote" />
+	<RadzenButton Text="@invoiceButtonText" Icon="request_quote" Disabled="invoiceAmount == 0" Click="CreateInvoice" />
 </div>
-
 
 @code {
 	private RadzenGrid<WorkEntry>? hoursGrid;
@@ -75,13 +74,15 @@
 	private ILookup<int, Project> projects = Enumerable.Empty<Project>().ToLookup(row => row.CustomerId);
 	private string invoiceButtonText = default!;
 	private string hoursText = default!;
+	private IEnumerable<AmountInfo> amounts = [];
+	private decimal invoiceAmount;
 
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 
-		hoursGridHelper = new(Dialog, Data);
-		linesGridHelper = new(Dialog, Data);
+		hoursGridHelper = new(Dialog, Data) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(Dialog, Data) { OnSuccess = (sender, args) => UpdateTotal() };
 
 		customers = await Data.QueryAsync(new MyCustomers());
 		projects = (await Data.QueryAsync(new MyProjects())).ToLookup(row => row.CustomerId);
@@ -97,8 +98,41 @@
 		await hoursGridHelper.RefreshAsync();
 		await linesGridHelper.RefreshAsync();
 
-		StateHasChanged();
+		UpdateTotal();
+	}
 
-		invoiceButtonText = $"Create Invoice: {hoursGridHelper.HourlyAmount:c2}";
+	private void UpdateTotal()
+	{
+		amounts = GetAmounts();
+		invoiceAmount = amounts.Sum(row => row.Amount);
+		invoiceButtonText = $"Create Invoice: {invoiceAmount:c2}";
+		StateHasChanged();
+	}
+
+	private async Task CreateInvoice()
+	{
+		try
+		{
+			var invoice = await Data.CreateInvoiceAsync(hoursGridHelper!.ProjectId);			
+			await Refresh();
+			await Dialog.Alert($"Created invoice {invoice.Number} for {invoice.Amount:c2}");
+			StateHasChanged();
+		}
+		catch (Exception exc)
+		{
+			await Dialog.Alert(exc.Message);
+		}		
+	}
+
+	private IEnumerable<AmountInfo> GetAmounts()
+	{
+		if (hoursGridHelper?.HourlyAmount > 0) yield return new() { Amount = hoursGridHelper.HourlyAmount, Category = "Hours" };
+		if (linesGridHelper?.Amount > 0) yield return new() { Amount = linesGridHelper.Amount, Category = "Expenses" };
+	}
+
+	private class AmountInfo
+	{
+		public string Category { get; init; } = default!;
+		public decimal Amount { get; init; }
 	}
 }

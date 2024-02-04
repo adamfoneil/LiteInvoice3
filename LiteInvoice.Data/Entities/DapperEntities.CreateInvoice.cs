@@ -4,7 +4,7 @@ namespace LiteInvoice.Data.Entities;
 
 public partial class DapperEntities
 {
-	public async Task<int> CreateInvoiceAsync(int projectId)
+	public async Task<int> CreateInvoiceIdAsync(int projectId)
 	{
 		int invoiceId = 0;
 		await DoTransactionAsync(async (cn, txn) =>
@@ -63,9 +63,15 @@ public partial class DapperEntities
 				"""
 				UPDATE "WorkEntries" SET "InvoiceId" = @invoiceId WHERE "ProjectId" = @projectId AND "InvoiceId" IS NULL;
 				UPDATE "LineEntries" SET "InvoiceId" = @invoiceId WHERE "ProjectId" = @projectId AND "InvoiceId" IS NULL;
-				""", new { invoiceId, projectId }, txn);			
+				""", new { invoiceId, projectId }, txn);
 		});
 
 		return invoiceId;
+	}
+
+	public async Task<Invoice> CreateInvoiceAsync(int projectId)
+	{
+		var invoiceId = await CreateInvoiceIdAsync(projectId);
+		return await Invoices.GetAsync(invoiceId);
 	}
 }

@@ -11,7 +11,15 @@ namespace LiteInvoice.App.Components.Pages.Entries
 
         public int ProjectId { get; set; }
 
-        public override async Task OnDeleteAsync(LineEntry row) => await Database.LineEntries.DeleteAsync(row);
+        public decimal Amount { get; private set; }
+
+		protected override async Task OnRefreshAsync()
+		{
+            await Task.CompletedTask;
+            Amount = Data.Sum(row => row.Amount);
+		}
+
+		public override async Task OnDeleteAsync(LineEntry row) => await Database.LineEntries.DeleteAsync(row);
 
         public override async Task OnSaveAsync(LineEntry data) => await Database.LineEntries.SaveAsync(data);
 
