@@ -22,3 +22,4 @@ Another reason I make apps like this is to refine my own patterns and techniques
   - [Business.razor](https://github.com/adamfoneil/LiteInvoice3/blob/master/LiteInvoice.App/Components/Pages/Setup/Business.razor) has example of single form entry.
   - [Customers.razor](https://github.com/adamfoneil/LiteInvoice3/blob/master/LiteInvoice.App/Components/Pages/Setup/Customers.razor) shows a list customer tiles and corresponding entry form.
   - [Projects.razor](https://github.com/adamfoneil/LiteInvoice3/blob/master/LiteInvoice.App/Components/Pages/Setup/Projects.razor) has a grid example.  
+  - [Entries/Index.razor](https://github.com/adamfoneil/LiteInvoice3/blob/master/LiteInvoice.App/Components/Pages/Entries/Index.razor) is the main data entry page.
