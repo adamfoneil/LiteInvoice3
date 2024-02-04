@@ -34,9 +34,9 @@ public partial class DapperEntities
 			invoiceId = await cn.ExecuteScalarAsync<int>(
 				"""
 				INSERT INTO "Invoices" (
-					"BusinessId", "Number", "Amount", "PaidAmount", "CreatedBy", "DateCreated"
+					"BusinessId", "Number", "ProjectId", "Amount", "PaidAmount", "CreatedBy", "DateCreated"
 				) SELECT
-					b."Id", b."NextInvoiceNumber", @amount, 0, @userName, @localTime
+					b."Id", b."NextInvoiceNumber", @projectId, @amount, 0, @userName, @localTime
 				FROM
 					"Projects" p
 					INNER JOIN "Customers" c ON p."CustomerId" = c."Id"
