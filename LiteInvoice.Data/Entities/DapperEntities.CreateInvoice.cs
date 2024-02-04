@@ -36,7 +36,7 @@ public partial class DapperEntities
 				INSERT INTO "Invoices" (
 					"BusinessId", "Number", "ProjectId", "Amount", "PaidAmount", "CreatedBy", "DateCreated"
 				) SELECT
-					b."Id", b."NextInvoiceNumber", @projectId, @amount, 0, @userName, @localTime
+					b."Id", b."NextInvoiceNumber", p."Id", @amount, 0, @userName, @localTime
 				FROM
 					"Projects" p
 					INNER JOIN "Customers" c ON p."CustomerId" = c."Id"
