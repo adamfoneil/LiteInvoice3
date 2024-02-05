@@ -9,7 +9,11 @@
 	<Columns>		
 		<RadzenGridColumn TItem="Invoice" Title="Customer" Property="CustomerName" />
 		<RadzenGridColumn TItem="Invoice" Title="Project" Property="ProjectName" />
-		<RadzenGridColumn TItem="Invoice" Title="Invoice #" Property="Number" />
+		<RadzenGridColumn TItem="Invoice" Title="Invoice #" Property="Number">
+			<Template>
+				<a href="/Invoice/@context.HashedId" target="_blank">@context.Number</a>
+			</Template>
+		</RadzenGridColumn>
 		<RadzenGridColumn TItem="Invoice" Title="$ Amount" Property="Amount" FormatString="{0:c2}" />
 		<RadzenGridColumn TItem="Invoice" Title="$ Paid" Property="PaidAmount" FormatString="{0:c2}">
 			<EditTemplate>

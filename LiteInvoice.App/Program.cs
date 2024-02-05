@@ -10,6 +10,7 @@ using Radzen;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.Secret.json", optional: true);
+builder.AddHashIds();
 
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();

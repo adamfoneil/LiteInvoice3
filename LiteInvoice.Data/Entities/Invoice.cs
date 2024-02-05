@@ -1,11 +1,12 @@
 ﻿using Dapper.Entities.Attributes;
 using LiteInvoice.Data.Entities.Conventions;
+using LiteInvoice.Data.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiteInvoice.Data.Entities;
 
 [Table("Invoices")]
-public class Invoice : BaseTable
+public class Invoice : BaseTable, IHashedResult
 {
     [NotUpdated]
     public int BusinessId { get; set; }
@@ -23,4 +24,6 @@ public class Invoice : BaseTable
 	public string CustomerName { get; set; } = default!;
 	[NotMapped]
 	public string ProjectName { get; set; } = default!;
+	[NotMapped]
+	public string HashedId { get; set; } = default!;
 }

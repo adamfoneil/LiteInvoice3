@@ -19,6 +19,16 @@ public partial class DapperEntities
 			userQuery.UserId = CurrentUser.UserId;
 		}
 
-		return await query.ExecuteAsync(connection);
+		var results = await query.ExecuteAsync(connection);
+
+		if (typeof(IHashedResult).IsAssignableFrom(typeof(TResult)))
+		{
+			foreach (IHashedResult row in results)
+			{
+				row.HashedId = HashIds.Encode(row.Id);
+			}
+		}
+
+		return results;
 	}
 }

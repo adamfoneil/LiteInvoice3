@@ -1,4 +1,5 @@
-﻿using LiteInvoice.Data.Entities;
+﻿using HashidsNet;
+using LiteInvoice.Data.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Npgsql;
@@ -17,12 +18,17 @@ internal static class Util
     internal static IDbConnection GetConnection() => new NpgsqlConnection(ConnectionString);
 
     internal static DapperEntities DapperEntities
-    {
-        get
+	{
+		get
         {
-            var connectionString = ConnectionString;
+			var config = Config.GetSection("HashIds");
+			var salt = config.GetValue<string>("Salt");
+			int minLength = config.GetValue<int?>("MinLength") ?? 5;
+			var hashIds = new Hashids(salt, minLength);
+
+			var connectionString = ConnectionString;
             var logger = new LoggerFactory().CreateLogger<DapperEntities>();
-            return new DapperEntities(connectionString, logger);
+            return new DapperEntities(connectionString, logger, hashIds);
         }
     }
 }

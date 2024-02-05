@@ -1,0 +1,20 @@
+﻿@page "/Invoice/{Id}"
+@using LiteInvoice.App.Components.Layout
+@inherits DataComponent
+@layout BlankLayout
+
+<h3>Invoice # @Invoice.Number</h3>
+
+@code {
+	private Invoice Invoice = new();
+
+	[Parameter]
+	public string Id { get; set; } = default!;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		Invoice = await Data.Invoices.GetAsync(Id);
+	}
+}

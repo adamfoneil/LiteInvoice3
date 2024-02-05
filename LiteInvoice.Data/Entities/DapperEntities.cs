@@ -1,12 +1,13 @@
 ﻿using Dapper;
 using Dapper.Entities.PostgreSql;
+using HashidsNet;
 using LiteInvoice.App.Data;
 using LiteInvoice.Data.Entities.Conventions;
 using Microsoft.Extensions.Logging;
 
 namespace LiteInvoice.Data.Entities;
 
-public partial class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase> logger) : PostgreSqlDatabase(connectionString, logger, new DefaultSqlBuilder() { CaseConversion = CaseConversionOptions.Exact })
+public partial class DapperEntities(string connectionString, ILogger<PostgreSqlDatabase> logger, Hashids hashIds) : PostgreSqlDatabase(connectionString, logger, new DefaultSqlBuilder() { CaseConversion = CaseConversionOptions.Exact })
 {
 	public string CurrentUserName { get; set; } = DefaultUserName;
 	public bool IsLoggedIn { get; set; }
@@ -17,10 +18,12 @@ public partial class DapperEntities(string connectionString, ILogger<PostgreSqlD
 	public ProjectRepository Projects => new(this);
 	public WorkEntryRepository WorkEntries => new(this);
 	public BaseRepository<LineEntry> LineEntries => new(this);
-	public BaseRepository<Invoice> Invoices => new(this);
+	public InvoiceRepository Invoices => new(this, HashIds);
 
 	public const string DefaultUserName = "system";
 	public const string DefaultTimeZone = "America/New_York";
+
+	public readonly Hashids HashIds = hashIds;
 
 	public async Task LoadCurrentUserAsync()
 	{		
