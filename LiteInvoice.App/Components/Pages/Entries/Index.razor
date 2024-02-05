@@ -113,7 +113,7 @@
 	{
 		try
 		{
-			var invoice = await Data.CreateInvoiceAsync(hoursGridHelper!.ProjectId);			
+			var invoice = await Data.Invoices.CreateAsync(hoursGridHelper!.ProjectId);			
 			await Refresh();
 			await Dialog.Alert($"Created invoice {invoice.Number} for {invoice.Amount:c2}");
 			StateHasChanged();
