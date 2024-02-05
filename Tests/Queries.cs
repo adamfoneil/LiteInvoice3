@@ -23,4 +23,7 @@ public class Queries
 
     [TestMethod]
     public void MyPendingLineEntries() => QueryHelper.Test<MyPendingLineEntries>(Util.GetConnection);
+
+    [TestMethod]
+    public void MyInvoices() => QueryHelper.Test<MyInvoices>(Util.GetConnection);
 }

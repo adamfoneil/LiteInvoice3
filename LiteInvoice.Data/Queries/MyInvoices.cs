@@ -9,7 +9,15 @@ public class MyInvoices : TestableQuery<Invoice>, IUserQuery
 {
 	public MyInvoices() : base(
 		"""
-
+		SELECT 
+			inv.*, c."Name" AS "CustomerName", p."Name" AS "ProjectName"
+		FROM
+			"Invoices" AS inv
+			INNER JOIN "Projects" AS p ON inv."ProjectId" = p."Id"
+			INNER JOIN "Customers" AS c ON p."CustomerId" = c."Id"
+			INNER JOIN "AspNetUsers" AS u ON c."BusinessId" = u."CurrentBusinessId"
+		WHERE
+			u."UserId" = @userId {andWhere}
 		""")
 	{		
 	}
@@ -18,6 +26,6 @@ public class MyInvoices : TestableQuery<Invoice>, IUserQuery
 
 	protected override IEnumerable<ITestableQuery> GetTestCasesInner()
 	{
-		throw new NotImplementedException();
+		yield return new MyInvoices() { UserId = 1 };
 	}
 }

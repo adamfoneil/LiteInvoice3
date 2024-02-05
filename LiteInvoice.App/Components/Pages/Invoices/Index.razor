@@ -3,8 +3,33 @@
 
 <h3>Invoices</h3>
 
+@if (gridHelper is null) return;
 
+<RadzenGrid @ref="grid" TItem="Invoice" Data="gridHelper.Data" RowUpdate="gridHelper.SaveRowAsync" RowCreate="gridHelper.SaveRowAsync">
+	<Columns>		
+		<RadzenGridColumn TItem="Invoice" Title="Customer" Property="CustomerName" />
+		<RadzenGridColumn TItem="Invoice" Title="Project" Property="ProjectName" />
+		<RadzenGridColumn TItem="Invoice" Title="Invoice #" Property="Number" />
+		<RadzenGridColumn TItem="Invoice" Title="$ Amount" Property="Amount" FormatString="{0:c2}" />
+		<RadzenGridColumn TItem="Invoice" Title="$ Paid" Property="PaidAmount" FormatString="{0:c2}">
+			<EditTemplate>
+				<RadzenNumeric @bind-Value="context.PaidAmount" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<RadzenGridColumn TItem="Invoice" Title="Date" Property="DateCreated" FormatString="{0:M/d/yy}" />
+		<GridControls Grid="grid" DeletingRow="gridHelper.DeleteRowAsync" TItem="Invoice" />
+	</Columns>
+</RadzenGrid>
 
 @code {
+	private RadzenGrid<Invoice>? grid;
+	private InvoicesGridHelper? gridHelper;	
 
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		gridHelper = new(Data, Dialog);
+		await gridHelper.RefreshAsync();
+	}
 }
