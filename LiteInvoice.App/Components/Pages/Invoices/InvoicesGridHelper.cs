@@ -9,7 +9,7 @@ public class InvoicesGridHelper(DapperEntities database, DialogService dialogs) 
 {
 	private readonly DapperEntities Database = database;
 
-	public override async Task OnDeleteAsync(Invoice row) => await Database.DeleteInvoiceAsync(row.Id);
+	public override async Task OnDeleteAsync(Invoice row) => await Database.Invoices.DeleteAsync(row.Id);
 
 	public override async Task OnSaveAsync(Invoice row) => await Database.Invoices.SaveAsync(row);
 	

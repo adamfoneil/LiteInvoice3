@@ -21,8 +21,8 @@ namespace Tests
 		{
 			var db = Util.DapperEntities;
 			db.CurrentUser = new() { UserName = "nobody", TimeZoneId = "America/New_York" };
-			var invoiceId = await db.CreateInvoiceIdAsync(-100);
-			await db.DeleteInvoiceAsync(invoiceId);
+			var invoiceId = await db.Invoices.CreateAsync(-100);
+			await db.Invoices.DeleteAsync(invoiceId);
 		}
 
 		[TestMethod]
@@ -66,14 +66,14 @@ namespace Tests
 				Amount = 10
 			});
 
-			var invoice = await db.CreateInvoiceAsync(project.Id);
+			var invoice = await db.Invoices.CreateAsync(project.Id);
 			Assert.IsTrue(invoice.Number == 1233);
 			Assert.IsTrue(invoice.Amount == 160m);
 
 			var biz = await db.Businesses.GetAsync(business.Id);
 			Assert.IsTrue(biz.NextInvoiceNumber == 1234);
 
-			await db.DeleteInvoiceAsync(invoice.Id);
+			await db.Invoices.DeleteAsync(invoice.Id);
 
 			await db.DoTransactionAsync(async (cn, txn) =>
 			{
