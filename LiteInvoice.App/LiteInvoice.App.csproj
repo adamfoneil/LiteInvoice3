@@ -33,8 +33,4 @@
     <None Include="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.App\.editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Pages\Dashboard\" />
-  </ItemGroup>
-
 </Project>
