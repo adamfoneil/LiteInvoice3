@@ -10,9 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\LiteInvoice.App\appsettings.Secret.json" Link="appsettings.Secret.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="..\LiteInvoice.ServerApp\appsettings.Secret.json" Link="appsettings.Secret.json" />
   </ItemGroup>
 
   <ItemGroup>
