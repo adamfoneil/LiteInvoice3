@@ -1,7 +1,7 @@
 ﻿using HashidsNet;
 using LiteInvoice.Data.Entities;
 
-namespace LiteInvoice.App.Extensions;
+namespace LiteInvoice.ServerApp.Extensions;
 
 internal static class MainExtensions
 {

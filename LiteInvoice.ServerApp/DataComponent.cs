@@ -1,7 +1,7 @@
 ﻿using LiteInvoice.Data.Entities;
 using Microsoft.AspNetCore.Components;
 
-namespace LiteInvoice.App;
+namespace LiteInvoice.ServerApp;
 
 public class DataComponent : ComponentBase
 {	

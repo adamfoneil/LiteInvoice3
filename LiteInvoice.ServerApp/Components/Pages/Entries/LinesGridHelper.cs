@@ -3,7 +3,7 @@ using LiteInvoice.Data.Entities;
 using LiteInvoice.Data.Queries;
 using Radzen;
 
-namespace LiteInvoice.App.Components.Pages.Entries
+namespace LiteInvoice.ServerApp.Components.Pages.Entries
 {
     public class LineEntryGridHelper(DialogService dialogs, DapperEntities data) : GridHelper<LineEntry>(dialogs)
     {

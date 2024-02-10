@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 
-namespace LiteInvoice.App.Components.Account
+namespace LiteInvoice.ServerApp.Components.Account
 {
 	internal sealed class IdentityRedirectManager(NavigationManager navigationManager)
 	{

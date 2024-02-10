@@ -1,7 +1,7 @@
-using LiteInvoice.App.Data;
+using LiteInvoice.Data;
 using Microsoft.AspNetCore.Identity;
 
-namespace LiteInvoice.App.Components.Account
+namespace LiteInvoice.ServerApp.Components.Account
 {
 	internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
 	{

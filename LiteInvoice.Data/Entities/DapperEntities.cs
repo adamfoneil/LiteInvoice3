@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Dapper.Entities.PostgreSql;
 using HashidsNet;
-using LiteInvoice.App.Data;
+using LiteInvoice.Data;
 using LiteInvoice.Data.Entities.Conventions;
 using Microsoft.Extensions.Logging;
 

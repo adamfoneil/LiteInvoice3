@@ -1,7 +1,7 @@
-using LiteInvoice.App.Components;
-using LiteInvoice.App.Components.Account;
-using LiteInvoice.App.Data;
-using LiteInvoice.App.Extensions;
+using LiteInvoice.ServerApp.Components;
+using LiteInvoice.ServerApp.Components.Account;
+using LiteInvoice.Data;
+using LiteInvoice.ServerApp.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
