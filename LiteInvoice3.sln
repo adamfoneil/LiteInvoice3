@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Radzen.Components", "Radzen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.ServerApp", "LiteInvoice.ServerApp\LiteInvoice.ServerApp.csproj", "{689F4A5D-0D76-4369-9228-80367926E2E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp\WebApp.csproj", "{631C031C-3F87-4DA2-A9B6-421908F921AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Client", "WebApp\WebApp.Client\WebApp.Client.csproj", "{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{689F4A5D-0D76-4369-9228-80367926E2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{689F4A5D-0D76-4369-9228-80367926E2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{689F4A5D-0D76-4369-9228-80367926E2E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{631C031C-3F87-4DA2-A9B6-421908F921AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{631C031C-3F87-4DA2-A9B6-421908F921AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{631C031C-3F87-4DA2-A9B6-421908F921AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{631C031C-3F87-4DA2-A9B6-421908F921AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
