@@ -1,6 +1,7 @@
 ﻿using AO.Radzen.Components.Abstract;
-using LiteInvoice.Data.Entities;
-using LiteInvoice.Data.Queries;
+using LiteInvoice.Entities;
+using LiteInvoice.Server;
+using LiteInvoice.Server.Queries;
 using Radzen;
 
 namespace WebApp.Components.Pages.Setup;
@@ -15,6 +16,6 @@ public class ProjectsGridHelper(DialogService dialog, DapperEntities data) : Gri
     
     public override async Task OnSaveAsync(Project data) => await Database.Projects.SaveAsync(data);
 
-    public override async Task<IEnumerable<Project>> QueryAsync() => await Database.QueryAsync(new MyProjects() {  CustomerId = CustomerId });
+    public override async Task<IEnumerable<Project>> QueryAsync() => await Database.QueryAsync(new MyProjects() { CustomerId = CustomerId });
     
 }

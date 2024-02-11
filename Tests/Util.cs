@@ -1,5 +1,6 @@
 ﻿using HashidsNet;
 using LiteInvoice.Data.Entities;
+using LiteInvoice.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Npgsql;

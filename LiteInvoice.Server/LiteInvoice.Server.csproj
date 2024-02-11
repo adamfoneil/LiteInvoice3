@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper.Entities.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Dapper.Entities.PostgreSql" Version="8.0.10-alpha" />
+    <PackageReference Include="Dapper.QX" Version="1.1.5" />
+    <PackageReference Include="Hashids.net" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.Data\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\LiteInvoice.ServerApp\appsettings.Secret.json" Link="appsettings.Secret.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\adamo\source\repos\LiteInvoice3\LiteInvoice.Data\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LiteInvoice.Entities\LiteInvoice.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\LiteInvoice.Data\LiteInvoice.Data.csproj" />
+    <ProjectReference Include="..\..\LiteInvoice.Entities\LiteInvoice.Entities.csproj" />
+    <ProjectReference Include="..\..\LiteInvoice.Server\LiteInvoice.Server.csproj" />
     <ProjectReference Include="..\..\Radzen.Components\Radzen.Components.csproj" />
     <ProjectReference Include="..\WebApp.Client\WebApp.Client.csproj" />
     <PackageReference Include="Dapper.Entities.PostgreSql" Version="8.0.10-alpha" />
@@ -24,6 +25,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     <PackageReference Include="Radzen.Blazor" Version="4.24.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Pages\Entries\" />
   </ItemGroup>
 
 </Project>

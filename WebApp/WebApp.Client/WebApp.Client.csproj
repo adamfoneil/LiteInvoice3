@@ -14,4 +14,9 @@
     <PackageReference Include="Radzen.Blazor" Version="4.24.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\LiteInvoice.Entities\LiteInvoice.Entities.csproj" />
+    <ProjectReference Include="..\..\Radzen.Components\Radzen.Components.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,9 +1,9 @@
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Identity;
-using LiteInvoice.Data;
 
 namespace WebApp.Components.Account
 {
-	internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
+    internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
 	{
 		public async Task<ApplicationUser> GetRequiredUserAsync(HttpContext context)
 		{

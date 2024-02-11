@@ -1,11 +1,11 @@
-using LiteInvoice.Data;
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace WebApp.Components.Account
 {
-	// Remove the "else if (EmailSender is IdentityNoOpEmailSender)" block from RegisterConfirmation.razor after updating with a real implementation.
-	internal sealed class IdentityNoOpEmailSender : IEmailSender<ApplicationUser>
+    // Remove the "else if (EmailSender is IdentityNoOpEmailSender)" block from RegisterConfirmation.razor after updating with a real implementation.
+    internal sealed class IdentityNoOpEmailSender : IEmailSender<ApplicationUser>
 	{
 		private readonly IEmailSender emailSender = new NoOpEmailSender();
 
