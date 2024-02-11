@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
+using LiteInvoice.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 

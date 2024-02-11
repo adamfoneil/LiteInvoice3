@@ -1,3 +1,4 @@
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
@@ -7,7 +8,6 @@ using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using System.Security.Claims;
 using WebApp.Client;
-using LiteInvoice.Data;
 
 namespace WebApp.Components.Account
 {

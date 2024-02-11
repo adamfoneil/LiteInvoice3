@@ -1,6 +1,6 @@
 ﻿using Dapper.Entities.Attributes;
-using LiteInvoice.Data.Entities.Interfaces;
 using LiteInvoice.Entities.Conventions;
+using LiteInvoice.Entities.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

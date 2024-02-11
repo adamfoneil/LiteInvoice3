@@ -1,8 +1,9 @@
-using LiteInvoice.Data;
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
+using WebApp;
 using WebApp.Components;
 using WebApp.Components.Account;
 
@@ -67,5 +68,7 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+app.MapQueries();
+app.MapCrudOperations();
 
 app.Run();

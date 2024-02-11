@@ -1,5 +1,5 @@
 ﻿using Dapper.QX;
-using LiteInvoice.Data.Queries;
+using LiteInvoice.Server.Queries;
 
 namespace Tests;
 

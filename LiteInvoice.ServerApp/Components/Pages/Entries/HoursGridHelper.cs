@@ -1,6 +1,7 @@
 ﻿using AO.Radzen.Components.Abstract;
-using LiteInvoice.Data.Entities;
-using LiteInvoice.Data.Queries;
+using LiteInvoice.Entities;
+using LiteInvoice.Server;
+using LiteInvoice.Server.Queries;
 using Radzen;
 
 namespace LiteInvoice.ServerApp.Components.Pages.Entries;

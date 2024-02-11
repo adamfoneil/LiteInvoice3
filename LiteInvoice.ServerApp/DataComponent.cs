@@ -1,4 +1,4 @@
-﻿using LiteInvoice.Data.Entities;
+﻿using LiteInvoice.Server;
 using Microsoft.AspNetCore.Components;
 
 namespace LiteInvoice.ServerApp;

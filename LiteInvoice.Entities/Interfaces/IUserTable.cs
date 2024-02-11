@@ -1,4 +1,4 @@
-﻿namespace LiteInvoice.Data.Entities.Interfaces;
+﻿namespace LiteInvoice.Entities.Interfaces;
 
 public interface IUserTable
 {

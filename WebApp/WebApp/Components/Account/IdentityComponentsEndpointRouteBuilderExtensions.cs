@@ -1,3 +1,4 @@
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -8,7 +9,6 @@ using System.Security.Claims;
 using System.Text.Json;
 using WebApp.Components.Account.Pages;
 using WebApp.Components.Account.Pages.Manage;
-using LiteInvoice.Data;
 
 namespace Microsoft.AspNetCore.Routing
 {

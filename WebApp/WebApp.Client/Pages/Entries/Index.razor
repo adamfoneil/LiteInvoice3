@@ -1,5 +1,7 @@
 ﻿@page "/Entries"
-@inherits DataComponent
+@using Refit
+@using WebApp.Components.Pages.Entries
+@inject HttpClient Http
 
 <h3>Entries</h3>
 <p>Use this to enter hours and expenses to build your invoices.</p>
@@ -69,6 +71,7 @@
 	private RadzenGrid<LineEntry>? linesGrid;
 	private WorkEntryGridHelper? hoursGridHelper;
 	private LineEntryGridHelper? linesGridHelper;
+	private IApiClient? api;
 
 	private IEnumerable<Customer> customers = [];
 	private ILookup<int, Project> projects = Enumerable.Empty<Project>().ToLookup(row => row.CustomerId);
@@ -78,14 +81,14 @@
 	private decimal invoiceAmount;
 
 	protected override async Task OnInitializedAsync()
-	{
-		await base.OnInitializedAsync();
+	{		
+		api = RestService.For<IApiClient>(Http);
 
-		hoursGridHelper = new(Dialog, Data) { OnSuccess = (sender, args) => UpdateTotal() };
-		linesGridHelper = new(Dialog, Data) { OnSuccess = (sender, args) => UpdateTotal() };
+		hoursGridHelper = new(Dialog, api) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(Dialog, api) { OnSuccess = (sender, args) => UpdateTotal() };
 
-		customers = await Data.QueryAsync(new MyCustomers());
-		projects = (await Data.QueryAsync(new MyProjects())).ToLookup(row => row.CustomerId);
+		customers = await api.GetMyCustomersAsync();
+		projects = (await api.GetMyProjectsAsync()).ToLookup(row => row.CustomerId);
 	}
 
 	async Task Refresh()
@@ -113,7 +116,7 @@
 	{
 		try
 		{
-			var invoice = await Data.Invoices.CreateAsync(hoursGridHelper!.ProjectId);			
+			var invoice = await api!.CreateInvoice(hoursGridHelper!.ProjectId);
 			await Refresh();
 			await Dialog.Alert($"Created invoice {invoice.Number} for {invoice.Amount:c2}");
 			StateHasChanged();

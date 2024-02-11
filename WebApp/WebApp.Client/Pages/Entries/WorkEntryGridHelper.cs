@@ -1,12 +1,13 @@
 ﻿using AO.Radzen.Components.Abstract;
 using LiteInvoice.Entities;
 using Radzen;
+using WebApp.Client;
 
 namespace WebApp.Components.Pages.Entries;
 
-public class WorkEntryGridHelper(DialogService dialog, DapperEntities database) : GridHelper<WorkEntry>(dialog)
-{
-    private readonly DapperEntities Database = database;
+public class WorkEntryGridHelper(DialogService dialog, IApiClient client) : GridHelper<WorkEntry>(dialog)
+{    
+    private readonly IApiClient Client = client;
 
     public int CustomerId { get; set; }
     public int ProjectId { get; set; }
@@ -15,9 +16,9 @@ public class WorkEntryGridHelper(DialogService dialog, DapperEntities database) 
     public decimal TotalHours { get; private set; }
     public string AccordionText => $"Hours - {TotalHours} hrs | {HourlyAmount:c2}";
 
-    public override async Task OnDeleteAsync(WorkEntry row) => await Database.WorkEntries.DeleteAsync(row);
+    public override async Task OnDeleteAsync(WorkEntry row) => await Client.DeleteWorkEntryAsync(row);
 
-    public override async Task OnSaveAsync(WorkEntry row) => await Database.WorkEntries.SaveAsync(row);
+    public override async Task OnSaveAsync(WorkEntry row) => await Client.SaveWorkEntryAsync(row);
 
     protected override async Task OnRefreshAsync()
     {
@@ -27,5 +28,5 @@ public class WorkEntryGridHelper(DialogService dialog, DapperEntities database) 
     }
 
     public override async Task<IEnumerable<WorkEntry>> QueryAsync() =>
-        await Database.QueryAsync(new MyPendingWorkEntries() { ProjectId = ProjectId });
+        await Client.GetMyPendingWorkEntries(ProjectId);
 }

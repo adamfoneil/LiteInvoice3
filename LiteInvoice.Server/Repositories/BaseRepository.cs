@@ -1,7 +1,7 @@
 ﻿using Dapper.Entities;
 using Dapper.Entities.Interfaces;
-using LiteInvoice.Data.Entities.Interfaces;
 using LiteInvoice.Entities.Conventions;
+using LiteInvoice.Entities.Interfaces;
 using LiteInvoice.Entities.Static;
 using LiteInvoice.Server;
 using System.Data;

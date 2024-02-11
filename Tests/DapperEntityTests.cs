@@ -1,4 +1,4 @@
-using LiteInvoice.Data.Entities;
+using LiteInvoice.Entities;
 
 namespace Tests
 {

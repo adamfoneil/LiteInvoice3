@@ -1,5 +1,5 @@
 ﻿using HashidsNet;
-using LiteInvoice.Data.Entities;
+using LiteInvoice.Server;
 
 internal static partial class Program
 {

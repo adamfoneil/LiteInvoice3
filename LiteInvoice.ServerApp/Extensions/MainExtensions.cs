@@ -1,5 +1,5 @@
 ﻿using HashidsNet;
-using LiteInvoice.Data.Entities;
+using LiteInvoice.Server;
 
 namespace LiteInvoice.ServerApp.Extensions;
 

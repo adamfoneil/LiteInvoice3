@@ -1,4 +1,4 @@
-using LiteInvoice.Data;
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace LiteInvoice.ServerApp.Components.Account

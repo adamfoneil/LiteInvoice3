@@ -1,6 +1,6 @@
+using LiteInvoice.Entities;
 using LiteInvoice.ServerApp.Components.Account.Pages;
 using LiteInvoice.ServerApp.Components.Account.Pages.Manage;
-using LiteInvoice.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
