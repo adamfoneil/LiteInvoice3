@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /LiteInvoice.App/appsettings.Secret.json
 /LiteInvoice.ServerApp/appsettings.Secret.json
+/WebApp/WebApp/appsettings.Secret.json
