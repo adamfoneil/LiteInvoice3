@@ -1,4 +1,5 @@
-﻿using Dapper.Entities.Interfaces;
+﻿using Azure.Core;
+using Dapper.Entities.Interfaces;
 using Dapper.QX;
 using LiteInvoice.Data.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -25,20 +26,23 @@ internal static class WebAppExtensions
 
 	internal static void MapCrud<TEntity>(this IEndpointRouteBuilder routeBuilder, string pattern, Func<DapperEntities, BaseRepository<TEntity>> repository) where TEntity : IEntity<int>
 	{
-		routeBuilder.MapPost(pattern, async (DapperEntities data, TEntity row) =>
+		routeBuilder.MapPost(pattern, async (DapperEntities data, HttpRequest request) =>
 		{
+			var row = await request.ReadFromJsonAsync<TEntity>() ?? throw new Exception("malformed entity");
 			await repository(data).SaveAsync(row);
 			return Results.Ok(row);
 		});
 
-		routeBuilder.MapPut(pattern, async (DapperEntities data, TEntity row) =>
+		routeBuilder.MapPut(pattern, async (DapperEntities data, HttpRequest request) =>
 		{
+			var row = await request.ReadFromJsonAsync<TEntity>() ?? throw new Exception("malformed entity");
 			await repository(data).MergeAsync(row);
 			return Results.Ok(row);
 		});
 
-		routeBuilder.MapDelete(pattern, async (DapperEntities data, TEntity row) =>
+		routeBuilder.MapDelete(pattern, async (DapperEntities data, HttpRequest request) =>
 		{
+			var row = await request.ReadFromJsonAsync<TEntity>() ?? throw new Exception("malformed entity");
 			await repository(data).DeleteAsync(row);
 			return Results.Ok();
 		});
