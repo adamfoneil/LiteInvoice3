@@ -1,0 +1,13 @@
+﻿@using LiteInvoice.Data.Entities
+@using Microsoft.AspNetCore.Components.Web
+@inject DapperEntities Entities
+@rendermode RenderMode.InteractiveServer
+
+@code {	
+	protected DapperEntities Data => Entities;
+
+	protected override async Task OnInitializedAsync()
+	{
+		if (Data.IsLoggedIn) await Data.LoadCurrentUserAsync();
+	}
+}
