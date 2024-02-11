@@ -1,0 +1,24 @@
+﻿@using LiteInvoice.Data.Entities.Interfaces
+
+<RadzenTextBox @bind-Value="Data.ContactName" MaxLength="50" Placeholder="contact name" class="w-100" />
+
+<div class="col-2-even">
+	<RadzenTextBox @bind-Value="Data.Email" Placeholder="email" MaxLength="50" />
+	<RadzenTextBox @bind-Value="Data.PhoneNumber" Placeholder="phone" MaxLength="20" />
+</div>
+
+<RadzenTextBox @bind-Value="Data.MailingAddress" Placeholder="street address" MaxLength="50" class="w-100" />
+
+<div class="col-4-address">
+	<RadzenTextBox @bind-Value="Data.City" Placeholder="city" MaxLength="30" />
+	<RadzenTextBox @bind-Value="Data.State" Placeholder="state" MaxLength="2" />
+	<RadzenTextBox @bind-Value="Data.PostalCode" Placeholder="ZIP code" MaxLength="20" />
+	<RadzenTextBox @bind-Value="Data.Country" Placeholder="Country" MaxLength="50" />
+</div>
+
+<RadzenTextBox @bind-Value="Data.Website" Placeholder="web site" class="w-100" MaxLength="50" />
+
+@code {
+	[Parameter]
+	public IContactInfo Data { get; set; } = default!;
+}

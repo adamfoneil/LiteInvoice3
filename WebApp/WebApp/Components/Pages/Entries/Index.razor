@@ -1,0 +1,138 @@
+﻿@page "/Entries"
+@inherits DataComponent
+
+<h3>Entries</h3>
+<p>Use this to enter hours and expenses to build your invoices.</p>
+
+@if (hoursGridHelper is null) return;
+@if (linesGridHelper is null) return;
+
+<div class="d-flex align-items-center justify-content-center mb-3">
+	<label class="me-3">
+		Customer:
+		<RadzenDropDown @bind-Value="hoursGridHelper.CustomerId" Data="customers" ValueProperty="Id" TextProperty="Name" Change="Refresh" />
+	</label>
+
+	<label>
+		Project:
+		<RadzenDropDown @bind-Value="hoursGridHelper.ProjectId" Data="projects[hoursGridHelper.CustomerId]" ValueProperty="Id" TextProperty="Name" Change="Refresh" />
+	</label>
+</div>
+
+<h4>Hours</h4>
+<GridInsertButton Grid="hoursGrid" OnCreateItem="() => new WorkEntry() { Date = DateTime.Today, ProjectId = hoursGridHelper.ProjectId }" />
+<RadzenGrid @ref="hoursGrid" Data="hoursGridHelper.Data" TItem="WorkEntry" RowCreate="hoursGridHelper.SaveRowAsync" RowUpdate="hoursGridHelper.SaveRowAsync">
+	<Columns>
+		<RadzenGridColumn TItem="WorkEntry" Title="Date" Property="Date" FormatString="{0:ddd M/d}">
+			<EditTemplate>
+				<RadzenDatePicker @bind-Value="context.Date" DateFormat="ddd M/d" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<RadzenGridColumn TItem="WorkEntry" Title="Comments" Property="Comments">
+			<EditTemplate>
+				<RadzenTextBox @bind-Value="context.Comments" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<RadzenGridColumn TItem="WorkEntry" Title="Hours" Property="Hours" Format="n2">
+			<EditTemplate>
+				<RadzenNumeric @bind-Value="context.Hours" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<GridControls Grid="hoursGrid" DeletingRow="hoursGridHelper.DeleteRowAsync" TItem="WorkEntry" />
+	</Columns>
+</RadzenGrid>
+
+<h4 class="mt-3">Expenses</h4>
+<GridInsertButton Grid="linesGrid" OnCreateItem="() => new LineEntry() { ProjectId = hoursGridHelper.ProjectId }"/>
+<RadzenGrid TItem="LineEntry" @ref="linesGrid" RowCreate="linesGridHelper.SaveRowAsync" RowUpdate="linesGridHelper.SaveRowAsync" Data="linesGridHelper.Data">
+	<Columns>
+		<RadzenGridColumn TItem="LineEntry" Title="Description" Property="Description">
+			<EditTemplate>
+				<RadzenTextArea @bind-Value="context.Description" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<RadzenGridColumn TItem="LineEntry" Title="Amount" Property="Amount" FormatString="{0:c2}">
+			<EditTemplate>
+				<RadzenNumeric @bind-Value="context.Amount" />
+			</EditTemplate>
+		</RadzenGridColumn>
+		<GridControls Grid="linesGrid" DeletingRow="linesGridHelper.DeleteRowAsync" TItem="LineEntry" />
+	</Columns>
+</RadzenGrid>
+
+<div class="d-flex justify-content-center mt-3">
+	<RadzenButton Text="@invoiceButtonText" Icon="request_quote" Disabled="invoiceAmount == 0" Click="CreateInvoice" />
+</div>
+
+@code {
+	private RadzenGrid<WorkEntry>? hoursGrid;
+	private RadzenGrid<LineEntry>? linesGrid;
+	private WorkEntryGridHelper? hoursGridHelper;
+	private LineEntryGridHelper? linesGridHelper;
+
+	private IEnumerable<Customer> customers = [];
+	private ILookup<int, Project> projects = Enumerable.Empty<Project>().ToLookup(row => row.CustomerId);
+	private string invoiceButtonText = default!;
+	private string hoursText = default!;
+	private IEnumerable<AmountInfo> amounts = [];
+	private decimal invoiceAmount;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		hoursGridHelper = new(Dialog, Data) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(Dialog, Data) { OnSuccess = (sender, args) => UpdateTotal() };
+
+		customers = await Data.QueryAsync(new MyCustomers());
+		projects = (await Data.QueryAsync(new MyProjects())).ToLookup(row => row.CustomerId);
+	}
+
+	async Task Refresh()
+	{
+		if (hoursGridHelper is null) return;
+		if (linesGridHelper is null) return;
+
+		linesGridHelper.ProjectId = hoursGridHelper.ProjectId;
+
+		await hoursGridHelper.RefreshAsync();
+		await linesGridHelper.RefreshAsync();
+
+		UpdateTotal();
+	}
+
+	private void UpdateTotal()
+	{
+		amounts = GetAmounts();
+		invoiceAmount = amounts.Sum(row => row.Amount);
+		invoiceButtonText = $"Create Invoice: {invoiceAmount:c2}";
+		StateHasChanged();
+	}
+
+	private async Task CreateInvoice()
+	{
+		try
+		{
+			var invoice = await Data.Invoices.CreateAsync(hoursGridHelper!.ProjectId);			
+			await Refresh();
+			await Dialog.Alert($"Created invoice {invoice.Number} for {invoice.Amount:c2}");
+			StateHasChanged();
+		}
+		catch (Exception exc)
+		{
+			await Dialog.Alert(exc.Message);
+		}		
+	}
+
+	private IEnumerable<AmountInfo> GetAmounts()
+	{
+		if (hoursGridHelper?.HourlyAmount > 0) yield return new() { Amount = hoursGridHelper.HourlyAmount, Category = "Hours" };
+		if (linesGridHelper?.Amount > 0) yield return new() { Amount = linesGridHelper.Amount, Category = "Expenses" };
+	}
+
+	private class AmountInfo
+	{
+		public string Category { get; init; } = default!;
+		public decimal Amount { get; init; }
+	}
+}

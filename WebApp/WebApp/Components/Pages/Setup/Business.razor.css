@@ -1,0 +1,10 @@
+﻿.col-2-even {
+	display:grid;
+	grid-template-columns:1fr 1fr
+}
+
+.payment-methods {
+	display:grid;
+	grid-template-columns:1fr 4fr;
+	align-items:center
+}

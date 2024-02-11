@@ -1,0 +1,68 @@
+﻿@page "/Setup/Business"
+@inherits DataComponent
+@using Entities = LiteInvoice.Data.Entities
+
+<h3>My Business</h3>
+<p>You must have at least one business setup. Most people will have just one, but nothing stops you from having multiple.</p>
+
+<div class="d-flex align-items-center">
+	<label>Current business:</label>
+	<RadzenDropDown Data="allBusinesses" ValueProperty="Id" TextProperty="DisplayName" @bind-Value="Data.CurrentUser.CurrentBusinessId" />
+</div>
+
+<hr />
+
+<RadzenTemplateForm Data="business" Submit="SaveBusiness" TItem="Entities.Business">
+	<RadzenTextBox @bind-Value="business.DisplayName" Placeholder="display name" class="w-100" />
+	
+	<ContactInfo Data="business" />
+
+	<div class="mt-3 col-2-even">
+		<label>
+			Hourly Rate:
+			<RadzenNumeric @bind-Value="business.HourlyRate" Placeholder="hourly rate" />
+		</label>
+		
+		<label>
+			Next Invoice Number:
+			<RadzenNumeric @bind-Value="business.NextInvoiceNumber" />
+		</label>	
+	</div>
+
+	<hr />
+	<h4>Payment Methods</h4>
+	<div class="payment-methods">
+	@foreach (var item in business.PaymentMethods)
+	{
+		<label>			
+			<RadzenCheckBox @bind-Value="item.IsEnabled" />
+			@item.Name
+		</label>
+
+		<RadzenTextBox @bind-Value="@item.MyLink" MaxLength="100" />
+	}
+	</div>
+
+	<RadzenButton ButtonType="ButtonType.Submit" Text="Save" Icon="save" class="mt-3" />
+</RadzenTemplateForm>
+
+@code {
+	IEnumerable<Entities.Business> allBusinesses = [];	
+	Entities.Business business = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		allBusinesses = await Data.QueryAsync(new MyBusinesses());
+
+		business = Data.CurrentUser.CurrentBusinessId.HasValue ? 
+			await Data.Businesses.GetAsync(Data.CurrentUser.CurrentBusinessId.Value) : 
+			new();
+	}
+
+	async Task SaveBusiness(Entities.Business business)
+	{
+		await Data.Businesses.SaveAsync(business);
+	}	
+}
