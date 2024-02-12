@@ -7,7 +7,7 @@ namespace WebApp;
 
 internal static partial class Program
 {
-    public static void MapQueries(this WebApplication routeBuilder)
+    public static void MapQueries(this IEndpointRouteBuilder routeBuilder)
     {
         var group = routeBuilder.MapGroup("/Queries");
         group.MapQuery<MyBusinesses, Business>("/MyBusinesses");
@@ -18,7 +18,7 @@ internal static partial class Program
         group.MapQuery<MyProjects, Project>("/MyProjects");
     }
 
-    public static void MapCrudOperations(this WebApplication routeBuilder)
+    public static void MapCrudOperations(this IEndpointRouteBuilder routeBuilder)
     {
         var group = routeBuilder.MapGroup("/Entities");
         group.MapCrud("/Customers", (data) => data.Customers);
