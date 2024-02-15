@@ -15,8 +15,8 @@ internal class LineEntryGridHelper(DialogService dialogs, IApiClient client) : G
 
 	protected override async Task OnRefreshAsync()
 	{
-			await Task.CompletedTask;
-			Amount = Data.Sum(row => row.Amount);
+		await Task.CompletedTask;
+		Amount = Data.Sum(row => row.Amount);
 	}
 
 	public override async Task OnDeleteAsync(LineEntry row) => await Client.DeleteLineEntryAsync(row);
