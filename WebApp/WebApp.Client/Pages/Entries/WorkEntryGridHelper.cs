@@ -5,7 +5,7 @@ using WebApp.Client;
 
 namespace WebApp.Components.Pages.Entries;
 
-public class WorkEntryGridHelper(DialogService dialog, IApiClient client) : GridHelper<WorkEntry>(dialog)
+internal class WorkEntryGridHelper(DialogService dialog, IApiClient client) : GridHelper<WorkEntry>(dialog)
 {    
     private readonly IApiClient Client = client;
 
