@@ -3,7 +3,7 @@ using Refit;
 
 namespace WebApp.Client;
 
-internal interface IApiClient
+public interface IApiClient
 {
     [Get("/Queries/MyProjects")]
     Task<IEnumerable<Project>> GetMyProjectsAsync();
