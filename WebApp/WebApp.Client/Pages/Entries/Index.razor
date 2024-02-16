@@ -1,6 +1,16 @@
 ﻿@page "/Entries"
 @inject IApiClient Api
 @using WebApp.Components.Pages.Entries
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+<AuthorizeView>
+	<Authorized>
+		<p>logged in as @context.User.Identity!.Name</p>
+	</Authorized>
+	<NotAuthorized>
+		<p>not logged in</p>
+	</NotAuthorized>
+</AuthorizeView>
 
 <h3>Entries</h3>
 <p>Use this to enter hours and expenses to build your invoices.</p>

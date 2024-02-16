@@ -43,7 +43,10 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 	.AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
-builder.Services.AddRefitClient<IApiClient>().ConfigureHttpClient(config => config.BaseAddress = new Uri("https://localhost:44331/"));
+builder.Services.AddRefitClient<IApiClient>().ConfigureHttpClient(client => 
+{ 	
+	client.BaseAddress = new Uri("https://localhost:44331/");	
+});
 
 var app = builder.Build();
 
@@ -67,7 +70,7 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
 	.AddInteractiveServerRenderMode()
 	.AddInteractiveWebAssemblyRenderMode()
-	.AddAdditionalAssemblies(typeof(WebApp.Client.UserInfo).Assembly);
+	.AddAdditionalAssemblies(typeof(UserInfo).Assembly);
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
