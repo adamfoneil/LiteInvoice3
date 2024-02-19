@@ -9,7 +9,7 @@ internal static partial class Program
 {
     public static void MapQueries(this IEndpointRouteBuilder routeBuilder)
     {
-        var group = routeBuilder.MapGroup("/Queries").RequireAuthorization();
+        var group = routeBuilder.MapGroup("/Queries");
         group.MapQuery<MyBusinesses, Business>("/MyBusinesses");
         group.MapQuery<MyCustomers, Customer>("/MyCustomers");
         group.MapQuery<MyInvoices, Invoice>("/MyInvoices");

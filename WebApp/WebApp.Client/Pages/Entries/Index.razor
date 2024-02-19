@@ -93,11 +93,11 @@
 	{
 		await base.OnInitializedAsync();
 
-		hoursGridHelper = new(UserName, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
-		linesGridHelper = new(UserName, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		hoursGridHelper = new(UserInfo.Email, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(UserInfo.Email, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
 
-		customers = await Api.GetMyCustomersAsync(UserName);
-		projects = (await Api.GetMyProjectsAsync(UserName)).ToLookup(row => row.CustomerId);
+		customers = await Api.GetMyCustomersAsync(UserInfo.Email);
+		projects = (await Api.GetMyProjectsAsync(UserInfo.Email)).ToLookup(row => row.CustomerId);
 	}
 
 	async Task Refresh()
@@ -125,7 +125,7 @@
 	{
 		try
 		{
-			var invoice = await Api!.CreateInvoice(UserName, hoursGridHelper!.ProjectId);
+			var invoice = await Api!.CreateInvoice(UserInfo.Email, hoursGridHelper!.ProjectId);
 			await Refresh();
 			await Dialog.Alert($"Created invoice {invoice.Number} for {invoice.Amount:c2}");
 			StateHasChanged();

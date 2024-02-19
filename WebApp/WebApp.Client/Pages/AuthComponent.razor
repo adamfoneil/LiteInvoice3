@@ -1,14 +1,18 @@
-﻿@inject AuthenticationStateProvider AuthState
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
+@inject AuthenticationStateProvider AuthState
+@inject IOptions<IdentityOptions> IdentityOptions
 
 @code {
-	protected string UserName { get; private set; } = "system";
+	protected UserInfo UserInfo { get; private set; } = new() { Email = "system", UserId = "system" };
 
 	protected override async Task OnInitializedAsync()
 	{
+		var options = IdentityOptions.Value;
 		var authState = await AuthState.GetAuthenticationStateAsync();
 		if (authState.User.Identity?.IsAuthenticated ?? false)
 		{
-			UserName = authState.User.Identity.Name!;
+			UserInfo = UserInfo.FromPrincipal(authState.User, options);
 		}		
 	}
 }

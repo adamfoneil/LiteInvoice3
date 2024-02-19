@@ -86,16 +86,10 @@ namespace WebApp.Components.Account
 
 			if (principal.Identity?.IsAuthenticated == true)
 			{
-				var userId = principal.FindFirst(options.ClaimsIdentity.UserIdClaimType)?.Value;
-				var email = principal.FindFirst(options.ClaimsIdentity.EmailClaimType)?.Value;
-
-				if (userId != null && email != null)
+				var userInfo = UserInfo.FromPrincipal(principal, options);
+				if (userInfo.IsValid)
 				{
-					state.PersistAsJson(nameof(UserInfo), new UserInfo
-					{
-						UserId = userId,
-						Email = email,
-					});
+					state.PersistAsJson(nameof(UserInfo), userInfo);
 				}
 			}
 		}
