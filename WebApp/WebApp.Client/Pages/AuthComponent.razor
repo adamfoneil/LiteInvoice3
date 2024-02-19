@@ -4,7 +4,7 @@
 @inject IOptions<IdentityOptions> IdentityOptions
 
 @code {
-	protected UserInfo UserInfo { get; private set; } = new() { Email = "system", UserId = "system" };
+	protected UserInfo UserInfo { get; private set; } = new() { UserId = 0, Email = "system", GuidId = "system" };
 
 	protected override async Task OnInitializedAsync()
 	{

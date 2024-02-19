@@ -24,6 +24,7 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRadzenComponents();
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, DbClaimsPrincipalFactory>();
 
 builder.Services.AddAuthentication(options =>
 	{
@@ -59,7 +60,6 @@ if (app.Environment.IsDevelopment())
 else
 {
 	app.UseExceptionHandler("/Error", createScopeForErrors: true);
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
 
