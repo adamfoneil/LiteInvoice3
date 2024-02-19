@@ -2,5 +2,5 @@
 
 public static class DateTimeExtensions
 {
-	public static DateOnly AsDateOnly(this DateTime dateTime) => new(dateTime.Year, dateTime.Month, dateTime.Day);	
+	public static DateOnly ToDateOnly(this DateTime dateTime) => new(dateTime.Year, dateTime.Month, dateTime.Day);	
 }
