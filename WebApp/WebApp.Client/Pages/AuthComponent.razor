@@ -1,0 +1,14 @@
+﻿@inject AuthenticationStateProvider AuthState
+
+@code {
+	protected string UserName { get; private set; } = "system";
+
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await AuthState.GetAuthenticationStateAsync();
+		if (authState.User.Identity?.IsAuthenticated ?? false)
+		{
+			UserName = authState.User.Identity.Name!;
+		}		
+	}
+}
