@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Radzen.Components", "Radzen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.ServerApp", "LiteInvoice.ServerApp\LiteInvoice.ServerApp.csproj", "{689F4A5D-0D76-4369-9228-80367926E2E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp\WebApp.csproj", "{631C031C-3F87-4DA2-A9B6-421908F921AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp\WebApp.csproj", "{631C031C-3F87-4DA2-A9B6-421908F921AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Client", "WebApp\WebApp.Client\WebApp.Client.csproj", "{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Client", "WebApp\WebApp.Client\WebApp.Client.csproj", "{6AF3F929-68D9-4D61-9EC6-6CAD48E9EA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteInvoice.Entities", "LiteInvoice.Entities\LiteInvoice.Entities.csproj", "{A281A48F-54AE-477F-81B1-13C24004D646}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.Entities", "LiteInvoice.Entities\LiteInvoice.Entities.csproj", "{A281A48F-54AE-477F-81B1-13C24004D646}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.Server", "LiteInvoice.Server\LiteInvoice.Server.csproj", "{A7D68385-9688-470D-AEC1-3384811B744C}"
 EndProject
