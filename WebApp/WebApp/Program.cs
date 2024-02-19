@@ -25,6 +25,11 @@ builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAu
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, DbClaimsPrincipalFactory>();
+builder.Services.AddRefitClient<IApiClient>().ConfigureHttpClient(client =>
+{
+	client.BaseAddress = new Uri("https://localhost:44331/");
+});
+
 
 builder.Services.AddAuthentication(options =>
 	{
