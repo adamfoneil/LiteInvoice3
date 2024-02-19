@@ -4,7 +4,7 @@
 @inject IOptions<IdentityOptions> IdentityOptions
 
 @code {
-	protected UserInfo UserInfo { get; private set; } = new() { UserId = 0, Email = "system", GuidId = "system" };
+	protected UserInfo UserInfo { get; private set; } = new() { HashedUserId = string.Empty, Email = "system", GuidId = string.Empty };
 
 	protected override async Task OnInitializedAsync()
 	{

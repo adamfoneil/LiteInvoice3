@@ -20,7 +20,7 @@ internal static partial class Program
 
     public static void MapCrudOperations(this IEndpointRouteBuilder routeBuilder)
     {
-        var group = routeBuilder.MapGroup("/Entities").RequireAuthorization();
+        var group = routeBuilder.MapGroup("/Entities");
         group.MapCrud("/Customers", (data) => data.Customers);
         group.MapCrud("/Projects", (data) => data.Projects);
         group.MapCrud("/WorkEntries", (data) => data.WorkEntries);

@@ -3,6 +3,7 @@
 @inherits AuthComponent
 @using WebApp.Components.Pages.Entries
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@rendermode InteractiveWebAssembly
 
 <AuthorizeView>
 	<Authorized>
@@ -93,11 +94,11 @@
 	{
 		await base.OnInitializedAsync();
 
-		hoursGridHelper = new(UserInfo.Email, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
-		linesGridHelper = new(UserInfo.Email, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		hoursGridHelper = new(UserInfo.HashedUserId, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(UserInfo.HashedUserId, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
 
-		customers = await Api.GetMyCustomersAsync(UserInfo.Email);
-		projects = (await Api.GetMyProjectsAsync(UserInfo.Email)).ToLookup(row => row.CustomerId);
+		customers = await Api.GetMyCustomersAsync(UserInfo.HashedUserId);
+		projects = (await Api.GetMyProjectsAsync(UserInfo.HashedUserId)).ToLookup(row => row.CustomerId);
 	}
 
 	async Task Refresh()

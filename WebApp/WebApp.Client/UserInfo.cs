@@ -8,7 +8,7 @@ namespace WebApp.Client
 	// to expose more information about the authenticated user to the client.
 	public class UserInfo
 	{
-		public required int UserId { get; set; }
+		public required string HashedUserId { get; set; }
 		public required string GuidId { get; set; }
 		public required string Email { get; set; }		
 
@@ -18,11 +18,11 @@ namespace WebApp.Client
 		{
 			var guidId = principal.FindFirst(identityOptions.ClaimsIdentity.UserIdClaimType)?.Value;
 			var email = principal.FindFirst(identityOptions.ClaimsIdentity.EmailClaimType)?.Value;
-			var dbId = int.Parse(principal.FindFirst(nameof(ApplicationUser.UserId))?.Value ?? "0");
+			var hashedIntId = principal.FindFirst(nameof(ApplicationUser.UserId))?.Value;
 
 			return new UserInfo
 			{
-				UserId = dbId,
+				HashedUserId = hashedIntId ?? string.Empty,
 				GuidId = guidId ?? string.Empty,
 				Email = email ?? string.Empty,
 			};
