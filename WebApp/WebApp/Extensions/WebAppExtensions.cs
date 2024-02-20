@@ -16,9 +16,9 @@ internal static class WebAppExtensions
 
 	internal static void MapQuery<TQuery, TData>(this IEndpointRouteBuilder routeBuilder, string pattern, TQuery query) where TQuery : Query<TData>
 	{
-		routeBuilder.MapGet(pattern, async (DapperEntities data, HttpRequest request, HttpContext context, Hashids hashids) =>
+		routeBuilder.MapGet(pattern, async (DapperEntities data, HttpRequest request, HttpContext context) =>
 		{
-			data.CurrentUser = hashids.UserFromRequest(request);
+			await data.LoadCurrentUserAsync(request.Headers.Authorization!);
 			SetQueryParams<TQuery, TData>(query, request);
 			var results = await data.QueryAsync(query);
 			return Results.Ok(results);
@@ -29,6 +29,7 @@ internal static class WebAppExtensions
 	{
 		routeBuilder.MapPost(pattern, async (DapperEntities data, HttpRequest request) =>
 		{
+			await data.LoadCurrentUserAsync(request.Headers.Authorization!);
 			var row = await request.ReadFromJsonAsync<TEntity>() ?? throw new Exception("malformed entity");
 			await repository(data).SaveAsync(row);
 			return Results.Ok(row);
@@ -36,6 +37,7 @@ internal static class WebAppExtensions
 
 		routeBuilder.MapPut(pattern, async (DapperEntities data, HttpRequest request) =>
 		{
+			await data.LoadCurrentUserAsync(request.Headers.Authorization!);
 			var row = await request.ReadFromJsonAsync<TEntity>() ?? throw new Exception("malformed entity");
 			await repository(data).MergeAsync(row);
 			return Results.Ok(row);
@@ -43,6 +45,7 @@ internal static class WebAppExtensions
 
 		routeBuilder.MapDelete(pattern, async (DapperEntities data, HttpRequest request) =>
 		{
+			await data.LoadCurrentUserAsync(request.Headers.Authorization!);
 			var row = await request.ReadFromJsonAsync<TEntity>() ?? throw new Exception("malformed entity");
 			await repository(data).DeleteAsync(row);
 			return Results.Ok();

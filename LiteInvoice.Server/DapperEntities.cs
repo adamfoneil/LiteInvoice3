@@ -41,6 +41,18 @@ public partial class DapperEntities(string connectionString, ILogger<PostgreSqlD
 		}		
 	}
 
+	public async Task LoadCurrentUserAsync(string hashedUserId)
+	{
+		var userId = HashIds.DecodeSingle(hashedUserId);
+		using var cn = GetConnection();
+		CurrentUser = await cn.QuerySingleOrDefaultAsync<ApplicationUser>(
+			@"SELECT * FROM ""AspNetUsers"" WHERE ""UserId""=@userId",
+			new { userId }) ?? throw new Exception($"user not found: {CurrentUserName}");
+
+		CurrentUserName = CurrentUser.UserName!;
+		IsLoggedIn = true;
+	}
+
 	public async Task SetTimeZoneAsync(string timeZoneId)
 	{
 		using var cn = GetConnection();
