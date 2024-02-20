@@ -1,3 +1,4 @@
+using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
@@ -30,7 +31,7 @@ namespace WebApp.Client
 				new Claim(ClaimTypes.NameIdentifier, userInfo.GuidId),
 				new Claim(ClaimTypes.Name, userInfo.Email),
 				new Claim(ClaimTypes.Email, userInfo.Email),
-				new Claim(nameof(UserInfo.HashedUserId), userInfo.HashedUserId)];
+				new Claim(nameof(ApplicationUser.UserId), userInfo.HashedUserId)];
 
 			authenticationStateTask = Task.FromResult(
 				new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims,
