@@ -2,5 +2,5 @@
 
 public interface IUserTable
 {
-    int UserId { get; set; }
+	int UserId { get; set; }
 }

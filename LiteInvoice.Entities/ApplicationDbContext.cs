@@ -1,4 +1,3 @@
-using LiteInvoice.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -12,15 +11,15 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 	public DbSet<Project> Projects { get; set; }
 	public DbSet<WorkEntry> WorkEntries { get; set; }
 	public DbSet<Invoice> Invoices { get; set; }
-	public DbSet<Customer> Customers { get; set; }	
+	public DbSet<Customer> Customers { get; set; }
 	public DbSet<LineEntry> LineEntries { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
+	protected override void OnModelCreating(ModelBuilder builder)
+	{
+		base.OnModelCreating(builder);
 
-		builder.Entity<Invoice>().HasAlternateKey(nameof(Invoice.BusinessId), nameof(Invoice.Number));		
-    }
+		builder.Entity<Invoice>().HasAlternateKey(nameof(Invoice.BusinessId), nameof(Invoice.Number));
+	}
 }
 
 public class AppDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
