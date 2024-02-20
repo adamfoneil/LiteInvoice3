@@ -5,6 +5,8 @@
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @rendermode InteractiveWebAssembly
 
+<RadzenComponents />
+
 <AuthorizeView>
 	<Authorized>
 		<p>logged in as @context.User.Identity!.Name</p>
