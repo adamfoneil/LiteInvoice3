@@ -60,7 +60,14 @@ internal static class WebAppExtensions
 
 		foreach (var setter in setters)
 		{
-			setter.Property.SetValue(query, setter.Value);
+			var convertValue = ConvertVal(setter.Property.PropertyType, setter.Value!);
+			setter.Property.SetValue(query, convertValue);
+		}
+
+		static object ConvertVal(Type type, string value)
+		{
+			if (type.Equals(typeof(int))) return int.Parse(value);
+			return value;
 		}
 	}
 }
