@@ -21,13 +21,13 @@ public interface IApiClient
     Task<WorkEntry> SaveWorkEntryAsync([Header("Authorization")]string hashedUserId, WorkEntry workEntry);
 
     [Delete("/Entities/WorkEntries")]
-    Task DeleteWorkEntryAsync([Header("Authorization")]string hashedUserId, WorkEntry workEntry);
+    Task DeleteWorkEntryAsync([Header("Authorization")]string hashedUserId, [Body]WorkEntry workEntry);
 
     [Get("/Queries/MyPendingLineEntries?projectId={projectId}")]
     Task<IEnumerable<LineEntry>> GetMyPendingLineEntries([Header("Authorization")]string hashedUserId, int projectId);
 
     [Delete("/Entities/LineEntries")]
-    Task DeleteLineEntryAsync([Header("Authorization")]string hashedUserId, LineEntry lineEntry);
+    Task DeleteLineEntryAsync([Header("Authorization")]string hashedUserId, [Body]LineEntry lineEntry);
 
     [Post("/Entities/LineEntries")]
     Task<LineEntry> SaveLineEntryAsync([Header("Authorization")]string hashedUserId, LineEntry lineEntry);
