@@ -8,6 +8,7 @@ using WebApp;
 using WebApp.Client;
 using WebApp.Components;
 using WebApp.Components.Account;
+using WebApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.Secret.json", optional: true);
@@ -25,11 +26,9 @@ builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAu
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, DbClaimsPrincipalFactory>();
-builder.Services.AddRefitClient<IApiClient>().ConfigureHttpClient(client =>
-{
-	client.BaseAddress = new Uri("https://localhost:44331/");
-});
-
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
+builder.Services.AddRefitClient<IApiClient>()
+	.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:44331/"));	
 
 builder.Services.AddAuthentication(options =>
 	{
@@ -45,7 +44,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>()
-	.AddSignInManager()
+	.AddSignInManager()	
 	.AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();

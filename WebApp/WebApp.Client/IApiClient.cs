@@ -3,32 +3,33 @@ using Refit;
 
 namespace WebApp.Client;
 
+[Headers("Authorization: Bearer")]
 public interface IApiClient
 {
     [Get("/Queries/MyProjects")]
-    Task<IEnumerable<Project>> GetMyProjectsAsync([Header("Authorization")]string hashedUserId);
+    Task<IEnumerable<Project>> GetMyProjectsAsync();
 
     [Get("/Queries/MyCustomers")]
-    Task<IEnumerable<Customer>> GetMyCustomersAsync([Header("Authorization")]string hashedUserId);
+    Task<IEnumerable<Customer>> GetMyCustomersAsync();
 
     [Post("/Invoice/{projectId}")]
-    Task<Invoice> CreateInvoice([Header("Authorization")]string hashedUserId, int projectId);
+    Task<Invoice> CreateInvoice(int projectId);
 
     [Get("/Queries/MyPendingWorkEntries?projectId={projectId}")]
-    Task<IEnumerable<WorkEntry>> GetMyPendingWorkEntries([Header("Authorization")]string hashedUserId, int projectId);
+    Task<IEnumerable<WorkEntry>> GetMyPendingWorkEntries(int projectId);
 
     [Post("/Entities/WorkEntries")]
-    Task<WorkEntry> SaveWorkEntryAsync([Header("Authorization")]string hashedUserId, WorkEntry workEntry);
+    Task<WorkEntry> SaveWorkEntryAsync(WorkEntry workEntry);
 
     [Delete("/Entities/WorkEntries")]
-    Task DeleteWorkEntryAsync([Header("Authorization")]string hashedUserId, [Body]WorkEntry workEntry);
+    Task DeleteWorkEntryAsync([Body]WorkEntry workEntry);
 
     [Get("/Queries/MyPendingLineEntries?projectId={projectId}")]
-    Task<IEnumerable<LineEntry>> GetMyPendingLineEntries([Header("Authorization")]string hashedUserId, int projectId);
+    Task<IEnumerable<LineEntry>> GetMyPendingLineEntries(int projectId);
 
     [Delete("/Entities/LineEntries")]
-    Task DeleteLineEntryAsync([Header("Authorization")]string hashedUserId, [Body]LineEntry lineEntry);
+    Task DeleteLineEntryAsync([Body]LineEntry lineEntry);
 
     [Post("/Entities/LineEntries")]
-    Task<LineEntry> SaveLineEntryAsync([Header("Authorization")]string hashedUserId, LineEntry lineEntry);
+    Task<LineEntry> SaveLineEntryAsync(LineEntry lineEntry);
 }

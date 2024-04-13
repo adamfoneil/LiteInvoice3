@@ -10,9 +10,9 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 builder.Services.AddRadzenComponents();
-builder.Services.AddRefitClient<IApiClient>().ConfigureHttpClient(client =>
+/*builder.Services.AddRefitClient<IApiClient>().ConfigureHttpClient(async (sp, client) =>
 {
 	client.BaseAddress = new Uri("https://localhost:44331/");
-});
+});*/
 
 await builder.Build().RunAsync();
