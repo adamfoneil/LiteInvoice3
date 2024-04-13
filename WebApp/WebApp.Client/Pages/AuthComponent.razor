@@ -5,7 +5,7 @@
 @inject IOptions<IdentityOptions> IdentityOptions
 
 @code {
-	protected UserInfo UserInfo { get; private set; } = new() { HashedUserId = string.Empty, Email = "system", GuidId = string.Empty };
+	protected UserInfo CurrentUser { get; private set; } = new() { HashedUserId = string.Empty, Email = "system", GuidId = string.Empty };
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -13,7 +13,7 @@
 		var authState = await AuthState.GetAuthenticationStateAsync();
 		if (authState.User.Identity?.IsAuthenticated ?? false)
 		{
-			UserInfo = UserInfo.FromPrincipal(authState.User, options);
+			CurrentUser = UserInfo.FromPrincipal(authState.User, options);
 		}		
 	}
 }

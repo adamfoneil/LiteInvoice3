@@ -1,5 +1,6 @@
 ﻿@page "/Entries"
 @inject IApiClient Api
+@inherits AuthComponent
 @using WebApp.Components.Pages.Entries
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @rendermode InteractiveWebAssembly
@@ -95,11 +96,11 @@
 	{
 		await base.OnInitializedAsync();
 
-		hoursGridHelper = new(Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
-		linesGridHelper = new(Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		hoursGridHelper = new(CurrentUser, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(CurrentUser, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
 
-		customers = await Api.GetMyCustomersAsync();
-		projects = (await Api.GetMyProjectsAsync()).ToLookup(row => row.CustomerId);
+		customers = await Api.GetMyCustomersAsync(CurrentUser.GuidId);
+		projects = (await Api.GetMyProjectsAsync(CurrentUser.GuidId)).ToLookup(row => row.CustomerId);
 	}
 
 	async Task Refresh()
@@ -127,7 +128,7 @@
 	{
 		try
 		{
-			var invoice = await Api!.CreateInvoice(hoursGridHelper!.ProjectId);
+			var invoice = await Api!.CreateInvoice(CurrentUser.GuidId, hoursGridHelper!.ProjectId);
 			await Refresh();
 			await Dialog.Alert($"Created invoice {invoice.Number} for {invoice.Amount:c2}");
 			StateHasChanged();

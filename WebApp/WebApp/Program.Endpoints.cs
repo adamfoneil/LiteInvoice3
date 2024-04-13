@@ -24,9 +24,9 @@ internal static partial class Program
 	}
 	*/
 
-	public static void MapQueries(this IEndpointRouteBuilder routeBuilder)
+	public static void MapQueries(this IEndpointRouteBuilder routeBuilder, params string[] policyNames)
 	{
-		var group = routeBuilder.MapGroup("/Queries").RequireAuthorization();
+		var group = routeBuilder.MapGroup("/api/Queries").RequireAuthorization(policyNames);
 		group.MapQuery<MyBusinesses, Business>("/MyBusinesses");
 		group.MapQuery<MyCustomers, Customer>("/MyCustomers");
 		group.MapQuery<MyInvoices, Invoice>("/MyInvoices");
@@ -35,9 +35,9 @@ internal static partial class Program
 		group.MapQuery<MyProjects, Project>("/MyProjects");
 	}
 
-	public static void MapCrudOperations(this IEndpointRouteBuilder routeBuilder)
+	public static void MapCrudOperations(this IEndpointRouteBuilder routeBuilder, params string[] policyNames)
 	{
-		var group = routeBuilder.MapGroup("/Entities").RequireAuthorization();
+		var group = routeBuilder.MapGroup("/api/Entities").RequireAuthorization(policyNames);
 		group.MapCrud("/Customers", (data) => data.Customers);
 		group.MapCrud("/Projects", (data) => data.Projects);
 		group.MapCrud("/WorkEntries", (data) => data.WorkEntries);

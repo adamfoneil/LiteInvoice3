@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.Entities", "Lit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteInvoice.Server", "LiteInvoice.Server\LiteInvoice.Server.csproj", "{A7D68385-9688-470D-AEC1-3384811B744C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTokens", "UserTokens\UserTokens.csproj", "{D17B67F7-7DC8-42FC-8CF2-E9F80EEED18A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A7D68385-9688-470D-AEC1-3384811B744C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7D68385-9688-470D-AEC1-3384811B744C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7D68385-9688-470D-AEC1-3384811B744C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D17B67F7-7DC8-42FC-8CF2-E9F80EEED18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17B67F7-7DC8-42FC-8CF2-E9F80EEED18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17B67F7-7DC8-42FC-8CF2-E9F80EEED18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17B67F7-7DC8-42FC-8CF2-E9F80EEED18A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

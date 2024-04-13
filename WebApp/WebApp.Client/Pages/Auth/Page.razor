@@ -1,9 +1,22 @@
 ﻿@page "/Auth"
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthenticationStateProvider AuthState
+@inject IOptions<IdentityOptions> IdentityOptions
+@inject ApiClient Api
 @rendermode InteractiveWebAssembly
 
 <h3>Auth Page</h3>
 
 @code {
+	UserInfo? userInfo;
 
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await AuthState.GetAuthenticationStateAsync();
+		userInfo = UserInfo.FromPrincipal(authState.User, IdentityOptions.Value);
+
+		var projects = await Api.GetMyProjectsAsync();
+	}
 }

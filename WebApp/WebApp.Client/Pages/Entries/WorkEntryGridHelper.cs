@@ -5,9 +5,10 @@ using WebApp.Client;
 
 namespace WebApp.Components.Pages.Entries;
 
-internal class WorkEntryGridHelper(DialogService dialog, IApiClient client) : GridHelper<WorkEntry>(dialog)
-{    
-    private readonly IApiClient Client = client;    
+internal class WorkEntryGridHelper(UserInfo currentUser, DialogService dialog, IApiClient client) : GridHelper<WorkEntry>(dialog)
+{
+	private readonly UserInfo CurrentUser = currentUser;
+	private readonly IApiClient Client = client;    
 
     public int CustomerId { get; set; }
     public int ProjectId { get; set; }
@@ -16,9 +17,9 @@ internal class WorkEntryGridHelper(DialogService dialog, IApiClient client) : Gr
     public decimal TotalHours { get; private set; }
     public string AccordionText => $"Hours - {TotalHours} hrs | {HourlyAmount:c2}";
 
-    public override async Task OnDeleteAsync(WorkEntry row) => await Client.DeleteWorkEntryAsync(row);
+    public override async Task OnDeleteAsync(WorkEntry row) => await Client.DeleteWorkEntryAsync(CurrentUser.GuidId, row);
 
-    public override async Task OnSaveAsync(WorkEntry row) => await Client.SaveWorkEntryAsync(row);
+    public override async Task OnSaveAsync(WorkEntry row) => await Client.SaveWorkEntryAsync(CurrentUser.GuidId, row);
 
     protected override async Task OnRefreshAsync()
     {
@@ -28,5 +29,5 @@ internal class WorkEntryGridHelper(DialogService dialog, IApiClient client) : Gr
     }
 
     public override async Task<IEnumerable<WorkEntry>> QueryAsync() =>
-        await Client.GetMyPendingWorkEntries(ProjectId);
+        await Client.GetMyPendingWorkEntries(CurrentUser.GuidId, ProjectId);
 }

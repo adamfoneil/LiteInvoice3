@@ -3,33 +3,32 @@ using Refit;
 
 namespace WebApp.Client;
 
-[Headers("Authorization: Bearer")]
 public interface IApiClient
 {
-    [Get("/Queries/MyProjects")]
-    Task<IEnumerable<Project>> GetMyProjectsAsync();
+    [Get("/api/Queries/MyProjects")]
+    Task<IEnumerable<Project>> GetMyProjectsAsync([Header("Authorization")] string userId);
 
-    [Get("/Queries/MyCustomers")]
-    Task<IEnumerable<Customer>> GetMyCustomersAsync();
+    [Get("/api/Queries/MyCustomers")]
+    Task<IEnumerable<Customer>> GetMyCustomersAsync([Header("Authorization")] string userId);
 
-    [Post("/Invoice/{projectId}")]
-    Task<Invoice> CreateInvoice(int projectId);
+    [Post("/api/Invoice/{projectId}")]
+    Task<Invoice> CreateInvoice([Header("Authorization")] string userId, int projectId);
 
-    [Get("/Queries/MyPendingWorkEntries?projectId={projectId}")]
-    Task<IEnumerable<WorkEntry>> GetMyPendingWorkEntries(int projectId);
+    [Get("/api/Queries/MyPendingWorkEntries?projectId={projectId}")]
+    Task<IEnumerable<WorkEntry>> GetMyPendingWorkEntries([Header("Authorization")] string userId, int projectId);
 
-    [Post("/Entities/WorkEntries")]
-    Task<WorkEntry> SaveWorkEntryAsync(WorkEntry workEntry);
+    [Post("/api/Entities/WorkEntries")]
+    Task<WorkEntry> SaveWorkEntryAsync([Header("Authorization")] string userId, WorkEntry workEntry);
 
-    [Delete("/Entities/WorkEntries")]
-    Task DeleteWorkEntryAsync([Body]WorkEntry workEntry);
+    [Delete("/api/Entities/WorkEntries")]
+    Task DeleteWorkEntryAsync([Header("Authorization")] string userId, [Body]WorkEntry workEntry);
 
-    [Get("/Queries/MyPendingLineEntries?projectId={projectId}")]
-    Task<IEnumerable<LineEntry>> GetMyPendingLineEntries(int projectId);
+    [Get("/api/Queries/MyPendingLineEntries?projectId={projectId}")]
+    Task<IEnumerable<LineEntry>> GetMyPendingLineEntries([Header("Authorization")] string userId, int projectId);
 
-    [Delete("/Entities/LineEntries")]
-    Task DeleteLineEntryAsync([Body]LineEntry lineEntry);
+    [Delete("/api/Entities/LineEntries")]
+    Task DeleteLineEntryAsync([Header("Authorization")] string userId, [Body]LineEntry lineEntry);
 
-    [Post("/Entities/LineEntries")]
-    Task<LineEntry> SaveLineEntryAsync(LineEntry lineEntry);
+    [Post("/api/Entities/LineEntries")]
+    Task<LineEntry> SaveLineEntryAsync([Header("Authorization")] string userId, LineEntry lineEntry);
 }
