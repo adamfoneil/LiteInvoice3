@@ -14,9 +14,6 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		var authState = await AuthState.GetAuthenticationStateAsync();
-		userInfo = UserInfo.FromPrincipal(authState.User, IdentityOptions.Value);
-
 		var projects = await Api.GetMyProjectsAsync();
 	}
 }

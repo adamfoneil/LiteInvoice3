@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ApiClientBaseLibrary\ApiClientBaseLibrary.csproj" />
     <ProjectReference Include="..\..\LiteInvoice.Entities\LiteInvoice.Entities.csproj" />
     <ProjectReference Include="..\..\Radzen.Components\Radzen.Components.csproj" />
   </ItemGroup>
