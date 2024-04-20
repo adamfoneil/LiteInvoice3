@@ -9,4 +9,4 @@ This project has components that wrap several [Radzen](https://blazor.radzen.com
   - Example [ProjectsGridHelper.cs](https://github.com/adamfoneil/LiteInvoice3/blob/master/WebApp/WebApp/Components/Pages/Setup/Projects.GridHelper.cs)
   - in use on [Projects.razor](https://github.com/adamfoneil/LiteInvoice3/blob/master/WebApp/WebApp/Components/Pages/Setup/Projects.razor)
 
-I offer this as a NuGet package available here: https://aosoftware.blob.core.windows.net/packages/index.json
+I offer this as a NuGet package **AO.Radzen.Components** available here: https://aosoftware.blob.core.windows.net/packages/index.json
