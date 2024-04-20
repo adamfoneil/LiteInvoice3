@@ -11,10 +11,15 @@ builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticat
 builder.Services.AddRadzenComponents();
 
 builder.Services
-	.AddTransient<CookieHandler>()	
+	.AddTransient<CookieHandler>()
+	.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(ApiClient.Name))
 	.AddHttpClient(ApiClient.Name, client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))	
 	.AddHttpMessageHandler<CookieHandler>();
 
-builder.Services.AddScoped<ApiClient>();
+builder.Services.AddScoped(sp =>
+{
+	var client = sp.GetRequiredService<IHttpClientFactory>().CreateClient(ApiClient.Name);
+	return new ApiClient(client, sp.GetRequiredService<ILogger<ApiClient>>());
+});
 
 await builder.Build().RunAsync();

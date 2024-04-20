@@ -5,9 +5,8 @@ using WebApp.Client;
 
 namespace WebApp.Components.Pages.Entries;
 
-internal class WorkEntryGridHelper(UserInfo currentUser, DialogService dialog, ApiClient client) : GridHelper<WorkEntry>(dialog)
-{
-	private readonly UserInfo CurrentUser = currentUser;
+internal class WorkEntryGridHelper(DialogService dialog, ApiClient client) : GridHelper<WorkEntry>(dialog)
+{	
 	private readonly ApiClient Client = client;    
 
     public int CustomerId { get; set; }

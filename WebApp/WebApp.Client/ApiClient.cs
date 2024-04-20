@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace WebApp.Client;
 
-public class ApiClient(IHttpClientFactory factory, ILogger<ApiClient> logger) : ApiClientBase(factory.CreateClient(Name), logger)
+public class ApiClient(HttpClient client, ILogger<ApiClient> logger) : ApiClientBase(client, logger)
 {
 	public const string Name = "API";
 

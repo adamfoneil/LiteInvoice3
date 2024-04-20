@@ -1,6 +1,5 @@
 ﻿@page "/Entries"
 @inject ApiClient Api
-@inherits AuthComponent
 @using WebApp.Components.Pages.Entries
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @rendermode InteractiveWebAssembly
@@ -96,8 +95,8 @@
 	{
 		await base.OnInitializedAsync();
 
-		hoursGridHelper = new(CurrentUser, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
-		linesGridHelper = new(CurrentUser, Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		hoursGridHelper = new(Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
+		linesGridHelper = new(Dialog, Api) { OnSuccess = (sender, args) => UpdateTotal() };
 
 		customers = await Api.GetMyCustomersAsync();
 		projects = (await Api.GetMyProjectsAsync()).ToLookup(row => row.CustomerId);

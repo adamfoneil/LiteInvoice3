@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace ApiClientBaseLibrary;
 
+/// <summary>
+/// since Refit doesn't seem to work with authentication in Blazor WebAssembly, this is kind of the next best thing
+/// </summary>
 public abstract class ApiClientBase(HttpClient httpClient, ILogger<ApiClientBase> logger)
 {
 	protected readonly ILogger<ApiClientBase> Logger = logger;
