@@ -1,10 +1,8 @@
 using LiteInvoice.Entities;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
-using Refit;
 using WebApp;
 using WebApp.Client;
 using WebApp.Components;
@@ -33,10 +31,6 @@ builder.Services
 	//.AddHttpMessageHandler<MessageHandler>();
 
 builder.Services.AddScoped<ApiClient>();
-
-builder.Services
-	.AddRefitClient<IApiClient>()
-	.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:44331/"));
 
 builder.Services.AddAuthentication(options =>
 	{

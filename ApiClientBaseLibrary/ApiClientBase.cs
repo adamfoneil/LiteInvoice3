@@ -34,6 +34,27 @@ public abstract class ApiClientBase(IHttpClientFactory httpClientFactory, ILogge
 		}		
 	}
 
+	protected async Task<TResult?> PostWithResultAsync<TResult>(string uri)
+	{
+		var response = await Client.PostAsync(uri, null);
+
+		try
+		{
+			response.EnsureSuccessStatusCode();
+			return await response.Content.ReadFromJsonAsync<TResult>();
+		}
+		catch (Exception exc)
+		{
+			Logger.LogError(exc, "Error in {Method}", nameof(GetAsync));
+			if (!await HandleException(response, exc))
+			{
+				throw;
+			}
+		}
+
+		return default;
+	}
+
 	protected async Task PostAsync<T>(string uri, T value)
 	{
 		var response = await Client.PostAsJsonAsync(uri, value);
