@@ -4,13 +4,11 @@ using System.Runtime.CompilerServices;
 
 namespace ApiClientBaseLibrary;
 
-public abstract class ApiClientBase(IHttpClientFactory httpClientFactory, ILogger<ApiClientBase> logger)
+public abstract class ApiClientBase(HttpClient httpClient, ILogger<ApiClientBase> logger)
 {
 	protected readonly ILogger<ApiClientBase> Logger = logger;
 
-	protected virtual HttpClient CreateClient(IHttpClientFactory httpClientFactory) => httpClientFactory.CreateClient();
-
-	protected HttpClient Client => CreateClient(httpClientFactory);
+	protected HttpClient Client { get; } = httpClient;
 
 	protected abstract Task<bool> HandleException(HttpResponseMessage? response, Exception exception, [CallerMemberName]string? methodName = null);
 

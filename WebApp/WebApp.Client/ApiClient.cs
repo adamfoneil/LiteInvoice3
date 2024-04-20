@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace WebApp.Client;
 
-public class ApiClient(IHttpClientFactory httpClientFactory, ILogger<ApiClient> logger) : ApiClientBase(httpClientFactory, logger)
+public class ApiClient(IHttpClientFactory factory, ILogger<ApiClient> logger) : ApiClientBase(factory.CreateClient(Name), logger)
 {
-	protected override HttpClient CreateClient(IHttpClientFactory httpClientFactory) => httpClientFactory.CreateClient("ServerAPI");
+	public const string Name = "API";
 
 	public async Task<IEnumerable<Project>> GetMyProjectsAsync() => await GetAsync<IEnumerable<Project>>("/api/Queries/MyProjects") ?? [];
 

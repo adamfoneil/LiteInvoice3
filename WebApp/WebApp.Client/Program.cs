@@ -10,4 +10,11 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 builder.Services.AddRadzenComponents();
 
+builder.Services
+	.AddTransient<CookieHandler>()	
+	.AddHttpClient(ApiClient.Name, client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))	
+	.AddHttpMessageHandler<CookieHandler>();
+
+builder.Services.AddScoped<ApiClient>();
+
 await builder.Build().RunAsync();
