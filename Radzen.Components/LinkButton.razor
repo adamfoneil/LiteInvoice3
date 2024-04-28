@@ -4,7 +4,7 @@
 <RadzenLink Path="@Path" Text="@Text" class="@CssClass" Icon="@Icon" />
 
 @code {
-	private string CssClass => $"rz-button {SizeCssClass} {VariantCssClass} {ButtonStyleClass} rz-shade-default";
+	private string CssClass => $"rz-button {SizeCssClass} {VariantCssClass} {ButtonStyleClass} rz-shade-default {Css.GetClass(Parameters)}";
 
 	private string ButtonStyleClass => ButtonStyle switch
 	{
@@ -53,4 +53,7 @@
 
 	[Parameter]
 	public Variant Variant { get; set; } = Variant.Filled;
+
+	[Parameter(CaptureUnmatchedValues = true)]
+	public Dictionary<string, object> Parameters { get; set; } = [];
 }
